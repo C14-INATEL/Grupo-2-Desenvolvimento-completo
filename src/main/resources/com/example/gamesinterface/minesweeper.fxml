@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.GridPane?>
+
+<GridPane fx:id="grid"
+          xmlns:fx="http://javafx.com/fxml"
+          fx:controller="br.inatel.grupo2.controller.MinesweeperController"
+          hgap="2"
+          vgap="2"/>
