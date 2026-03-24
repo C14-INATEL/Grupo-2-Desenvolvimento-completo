@@ -34,6 +34,7 @@ class MenuTest {
     }
 
     // Aqui comecam os testes unitarios.
+    //testes de titulo de menu
     @Test
     void tituloMenu() throws Exception {
         MenuController controller = fx(() -> {
@@ -46,6 +47,7 @@ class MenuTest {
         assertEquals("GAME HUB", fx(titulo::getText));
     }
 
+    //teste para troca de nick
     @Test
     void trocaNick() throws Exception {
         MenuFake controller = new MenuFake(Optional.of("Usuario"));
@@ -58,6 +60,7 @@ class MenuTest {
         assertEquals("Bem-vindo, Usuario", fx(tela.textoBemVindo::getText));
     }
 
+    //teste para abrir jogo do pedra papel e tesoura
     @Test
     void abreJogo() throws Exception {
         MenuFake controller = new MenuFake(Optional.empty());
@@ -71,6 +74,7 @@ class MenuTest {
         assertTrue(controller.abriuJogo);
     }
 
+    //teste para mostrar error caso outro jogo que não existe seja selecionado
     @Test
     void mostraError() throws Exception {
         MenuFake controller = new MenuFake(Optional.empty());
