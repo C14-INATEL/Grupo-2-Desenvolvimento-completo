@@ -1,7 +1,7 @@
-package com.example.gamesinterface;
+package br.inatel.grupo2.app;
 
 public class Launcher {
     public static void main(String[] args) {
-        HelloApplication.main(args);
+        GameHubApplication.main(args);
     }
 }

@@ -1,4 +1,4 @@
-package br.inatel.grupo2.model;
+package br.inatel.grupo2.model.minesweeper;
 
 import java.util.Random;
 
