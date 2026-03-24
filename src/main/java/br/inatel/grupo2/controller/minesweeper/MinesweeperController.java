@@ -1,7 +1,7 @@
-package br.inatel.grupo2.controller;
+package br.inatel.grupo2.controller.minesweeper;
 
-import br.inatel.grupo2.model.MinesweeperBoard;
-import br.inatel.grupo2.model.MinesweeperCell;
+import br.inatel.grupo2.model.minesweeper.MinesweeperBoard;
+import br.inatel.grupo2.model.minesweeper.MinesweeperCell;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;

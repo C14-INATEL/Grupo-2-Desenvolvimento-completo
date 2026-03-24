@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="560.0" prefWidth="820.0" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.inatel.grupo2.controller.rockpaperscissors.RockPaperScissorsViewController">
+    <padding>
+        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="12.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button text="Voltar" onAction="#onBack" styleClass="ghost-button"/>
+                <Label text="Pedra, Papel e Tesoura" styleClass="screen-title"/>
+            </HBox>
+            <Label text="Escolha sua jogada e acompanhe o placar em tempo real." styleClass="screen-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="26.0">
+            <HBox alignment="CENTER" spacing="16.0">
+                <Button mnemonicParsing="false" onAction="#onChooseRock" styleClass="choice-button choice-rock" text="Pedra"/>
+                <Button mnemonicParsing="false" onAction="#onChoosePaper" styleClass="choice-button choice-paper" text="Papel"/>
+                <Button mnemonicParsing="false" onAction="#onChooseScissors" styleClass="choice-button choice-scissors" text="Tesoura"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20.0">
+                <VBox alignment="CENTER" spacing="10.0" styleClass="choice-card">
+                    <Label text="Sua jogada" styleClass="card-label"/>
+                    <Label fx:id="playerChoiceLabel" styleClass="choice-value" text="Aguardando"/>
+                </VBox>
+
+                <Region prefWidth="12.0"/>
+
+                <VBox alignment="CENTER" spacing="10.0" styleClass="choice-card">
+                    <Label text="Computador" styleClass="card-label"/>
+                    <Label fx:id="computerChoiceLabel" styleClass="choice-value" text="Aguardando"/>
+                </VBox>
+            </HBox>
+
+            <Label fx:id="resultLabel" styleClass="result-label" text="Escolha uma jogada para comecar a partida." wrapText="true"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox alignment="CENTER" spacing="16.0">
+            <HBox alignment="CENTER" spacing="18.0">
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="Voce" styleClass="card-label"/>
+                    <Label fx:id="playerScoreLabel" styleClass="score-number" text="0"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="Computador" styleClass="card-label"/>
+                    <Label fx:id="computerScoreLabel" styleClass="score-number" text="0"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="Empates" styleClass="card-label"/>
+                    <Label fx:id="drawsLabel" styleClass="score-number" text="0"/>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="12.0">
+                <Label fx:id="roundLabel" styleClass="helper-text" text="Rodadas jogadas: 0"/>
+                <Button text="Reiniciar placar" onAction="#onResetMatch" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>

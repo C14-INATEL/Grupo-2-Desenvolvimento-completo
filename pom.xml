@@ -67,7 +67,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.8</version>
                 <configuration>
-                    <mainClass>com.example.gamesinterface.HelloApplication</mainClass>
+                    <mainClass>br.inatel.grupo2.app.GameHubApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>
