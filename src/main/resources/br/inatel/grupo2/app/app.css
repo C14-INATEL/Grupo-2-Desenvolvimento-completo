@@ -1,0 +1,410 @@
+/* =============================================
+   GAME HUB — Dark Minimalist Theme
+   ============================================= */
+
+.root {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", "SF Pro Display", "Helvetica Neue", sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #0f0f1e, #1a1a2e);
+    -fx-font-smoothing-type: lcd;
+}
+
+/* ---------- Typography ---------- */
+
+.screen-title {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", "SF Pro Display", sans-serif;
+    -fx-font-size: 32px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #f0f0f5;
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.15), 12, 0, 0, 2);
+}
+
+.screen-subtitle {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #7c7c9a;
+}
+
+.helper-text {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #555570;
+    -fx-opacity: 0.85;
+}
+
+.brand-tag {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #46465e;
+}
+
+.status-label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-text-fill: #9090aa;
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 10px;
+    -fx-padding: 8px 14px;
+}
+
+/* ---------- Game List ---------- */
+
+.game-list {
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+    -fx-background-radius: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.04);
+    -fx-border-radius: 14px;
+    -fx-padding: 4px;
+}
+
+.game-list .list-cell {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: normal;
+    -fx-padding: 11px 14px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #b0b0c8;
+    -fx-background-radius: 10px;
+}
+
+.game-list .list-cell:filled:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+}
+
+.game-list .list-cell:filled:selected {
+    -fx-background-color: linear-gradient(to right, rgba(108, 92, 231, 0.2), rgba(168, 85, 247, 0.12));
+    -fx-background-radius: 10px;
+    -fx-text-fill: #f0f0f5;
+    -fx-font-weight: bold;
+}
+
+.game-list .list-cell:empty {
+    -fx-background-color: transparent;
+}
+
+/* ScrollBar dark style */
+.game-list .scroll-bar:vertical .thumb {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 4px;
+}
+.game-list .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+}
+.game-list .scroll-bar:vertical .increment-button,
+.game-list .scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+}
+.game-list .scroll-bar:vertical .increment-arrow,
+.game-list .scroll-bar:vertical .decrement-arrow {
+    -fx-shape: "";
+    -fx-padding: 0;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+    -fx-cursor: hand;
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-padding: 9px 20px;
+    -fx-background-radius: 10px;
+    -fx-border-width: 0;
+}
+
+.primary-button {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 13px;
+    -fx-background-color: linear-gradient(to right, #6c5ce7, #a855f7);
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.3), 8, 0, 0, 2);
+}
+
+.primary-button:hover {
+    -fx-background-color: linear-gradient(to right, #7c6cf7, #b865ff);
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.45), 12, 0, 0, 3);
+}
+
+.secondary-button {
+    -fx-text-fill: #9090aa;
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-radius: 10px;
+}
+
+.secondary-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-text-fill: #c8c8dd;
+}
+
+.ghost-button {
+    -fx-text-fill: #7c7c9a;
+    -fx-font-size: 12px;
+    -fx-background-color: transparent;
+    -fx-border-color: rgba(255, 255, 255, 0.06);
+    -fx-border-radius: 10px;
+}
+
+.ghost-button:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-text-fill: #c8c8dd;
+}
+
+/* ---------- Hamburger Menu ---------- */
+
+.hamburger-btn {
+    -fx-font-size: 20px;
+    -fx-text-fill: #555570;
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 8px;
+    -fx-padding: 4px 10px;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.hamburger-btn:hover {
+    -fx-text-fill: #e8e8e8;
+    -fx-background-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Settings Overlay (dark backdrop) */
+.settings-overlay {
+    -fx-background-color: rgba(0, 0, 0, 0.55);
+}
+
+/* Settings Panel (sidebar) */
+.settings-panel {
+    -fx-background-color: linear-gradient(to bottom, #0e0e22, #141430);
+    -fx-border-color: rgba(255, 255, 255, 0.04);
+    -fx-border-width: 0 1 0 0;
+    -fx-padding: 28px 22px;
+    -fx-spacing: 14px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 20, 0, 4, 0);
+}
+
+.settings-title {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #9090aa;
+}
+
+.settings-close-btn {
+    -fx-font-size: 16px;
+    -fx-text-fill: #555570;
+    -fx-background-color: transparent;
+    -fx-padding: 4px 8px;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+}
+
+.settings-close-btn:hover {
+    -fx-text-fill: #e8e8e8;
+}
+
+.settings-item {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-text-fill: #b0b0c8;
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 14px;
+    -fx-font-size: 12px;
+    -fx-font-weight: normal;
+    -fx-cursor: hand;
+    -fx-border-width: 0;
+    -fx-alignment: CENTER_LEFT;
+}
+
+.settings-item:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.07);
+    -fx-text-fill: #f0f0f5;
+}
+
+.profile-circle {
+    -fx-background-color: linear-gradient(to bottom right, #6c5ce7, #a855f7);
+    -fx-background-radius: 100;
+    -fx-min-width: 56px;
+    -fx-min-height: 56px;
+    -fx-max-width: 56px;
+    -fx-max-height: 56px;
+    -fx-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.35), 10, 0, 0, 2);
+}
+
+.profile-initials {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 18px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #ffffff;
+}
+
+.nick-label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d8d8e8;
+}
+
+/* ---------- Game Detail Page ---------- */
+
+.game-icon-large {
+    -fx-font-size: 56px;
+    -fx-text-fill: #e8e8e8;
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.2), 16, 0, 0, 4);
+}
+
+.game-detail-card {
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(255, 255, 255, 0.04);
+    -fx-border-radius: 18px;
+    -fx-padding: 36px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 12, 0, 0, 4);
+}
+
+.game-description {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 13px;
+    -fx-text-fill: #7c7c9a;
+    -fx-wrap-text: true;
+    -fx-line-spacing: 3;
+}
+
+/* ---------- Rock Paper Scissors ---------- */
+
+.choice-button {
+    -fx-min-width: 140px;
+    -fx-min-height: 72px;
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d8d8e8;
+    -fx-background-radius: 14px;
+}
+
+.choice-rock {
+    -fx-background-color: rgba(108, 92, 231, 0.15);
+    -fx-border-color: rgba(108, 92, 231, 0.2);
+    -fx-border-radius: 14px;
+}
+
+.choice-rock:hover {
+    -fx-background-color: rgba(108, 92, 231, 0.30);
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.2), 8, 0, 0, 2);
+}
+
+.choice-paper {
+    -fx-background-color: rgba(85, 170, 255, 0.1);
+    -fx-border-color: rgba(85, 170, 255, 0.18);
+    -fx-border-radius: 14px;
+}
+
+.choice-paper:hover {
+    -fx-background-color: rgba(85, 170, 255, 0.25);
+    -fx-effect: dropshadow(gaussian, rgba(85, 170, 255, 0.2), 8, 0, 0, 2);
+}
+
+.choice-scissors {
+    -fx-background-color: rgba(255, 107, 107, 0.1);
+    -fx-border-color: rgba(255, 107, 107, 0.18);
+    -fx-border-radius: 14px;
+}
+
+.choice-scissors:hover {
+    -fx-background-color: rgba(255, 107, 107, 0.25);
+    -fx-effect: dropshadow(gaussian, rgba(255, 107, 107, 0.2), 8, 0, 0, 2);
+}
+
+.choice-card {
+    -fx-min-width: 200px;
+    -fx-min-height: 120px;
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+    -fx-background-radius: 16px;
+    -fx-border-color: rgba(255, 255, 255, 0.04);
+    -fx-border-radius: 16px;
+    -fx-padding: 18px;
+}
+
+.card-label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #555570;
+}
+
+.choice-value {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 22px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #e0e0f0;
+}
+
+.result-label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d8d8e8;
+    -fx-background-color: rgba(255, 255, 255, 0.03);
+    -fx-background-radius: 12px;
+    -fx-padding: 10px 18px;
+}
+
+.score-card {
+    -fx-min-width: 110px;
+    -fx-background-color: rgba(255, 255, 255, 0.025);
+    -fx-background-radius: 14px;
+    -fx-border-color: rgba(255, 255, 255, 0.04);
+    -fx-border-radius: 14px;
+    -fx-padding: 14px;
+}
+
+.score-number {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 26px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #f0f0f5;
+}
+
+/* ---------- versus label ---------- */
+
+.vs-label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-font-size: 16px;
+    -fx-font-weight: 800;
+    -fx-text-fill: #46465e;
+}
+
+/* ---------- Separator ---------- */
+
+.dark-separator {
+    -fx-background-color: rgba(255, 255, 255, 0.04);
+    -fx-pref-height: 1;
+    -fx-max-height: 1;
+}
+
+/* ---------- Dialog styling ---------- */
+
+.dialog-pane {
+    -fx-background-color: #1a1a2e;
+}
+
+.dialog-pane .content {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-text-fill: #b0b0c8;
+}
+
+.dialog-pane .header-panel {
+    -fx-background-color: #12122a;
+}
+
+.dialog-pane .header-panel .label {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+    -fx-text-fill: #d8d8e8;
+}
+
+.dialog-pane .button {
+    -fx-font-family: "Segoe UI Variable", "Segoe UI", sans-serif;
+}
