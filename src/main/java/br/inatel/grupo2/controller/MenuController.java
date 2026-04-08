@@ -47,9 +47,7 @@ public class MenuController {
 
     @FXML
     protected void onAdicionarJogo() {
-        TextInputDialog dialog = new TextInputDialog("Novo Jogo");
-        dialog.setHeaderText("Qual jogo deseja adicionar?");
-        dialog.showAndWait()
+        solicitarNovoJogo()
                 .map(String::trim)
                 .filter(nome -> !nome.isEmpty())
                 .ifPresent(nome -> {
@@ -57,6 +55,12 @@ public class MenuController {
                     listaJogos.getSelectionModel().select(nome);
                     statusLabel.setText("Jogo adicionado a lista.");
                 });
+    }
+
+    protected Optional<String> solicitarNovoJogo() {
+        TextInputDialog dialog = new TextInputDialog("Novo Jogo");
+        dialog.setHeaderText("Qual jogo deseja adicionar?");
+        return dialog.showAndWait();
     }
 
     @FXML
