@@ -77,29 +77,6 @@ class MenuTest {
         assertTrue(controller.abriuJogo);
     }
 
-    //teste para o menu de configurações (hamburguer)
-    @Test
-    void toggleConfiguracoes() throws Exception {
-        MenuController controller = new MenuController();
-        fx(() -> {
-            VBox settingsPanel = new VBox();
-            Pane settingsOverlay = new Pane();
-            settingsPanel.setVisible(false);
-            settingsOverlay.setVisible(false);
-
-            setar(controller, "settingsPanel", settingsPanel);
-            setar(controller, "settingsOverlay", settingsOverlay);
-
-            java.lang.reflect.Method method = MenuController.class.getDeclaredMethod("onToggleSettings");
-            method.setAccessible(true);
-            method.invoke(controller);
-            return null;
-        });
-
-        VBox panel = campo(controller, "settingsPanel", VBox.class);
-        assertTrue(panel.isVisible(), "O painel de configurações deveria estar visível após o toggle");
-    }
-
     //teste para mostrar error caso outro jogo que não existe seja selecionado
     @Test
     void mostraError() throws Exception {

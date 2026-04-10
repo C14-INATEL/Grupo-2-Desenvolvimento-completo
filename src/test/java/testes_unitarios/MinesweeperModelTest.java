@@ -1,3 +1,4 @@
+package testes_unitarios;
 
 import br.inatel.grupo2.model.minesweeper.MinesweeperBoard;
 import br.inatel.grupo2.model.minesweeper.MinesweeperCell;

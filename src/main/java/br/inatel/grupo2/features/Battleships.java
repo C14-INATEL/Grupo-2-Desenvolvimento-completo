@@ -6,7 +6,7 @@ public class Battleships {
     boolean[][] acertos = new boolean[10][10];
 
     int i;
-    Random r = new Random(10);
+    Random r = new Random();
 
     private int inicioX;
     private int inicioY;
@@ -132,5 +132,9 @@ public class Battleships {
     }
     public boolean isVertical() {
         return vertical;
+    }
+
+    public boolean[][] getCampo() {
+        return campo;
     }
 }

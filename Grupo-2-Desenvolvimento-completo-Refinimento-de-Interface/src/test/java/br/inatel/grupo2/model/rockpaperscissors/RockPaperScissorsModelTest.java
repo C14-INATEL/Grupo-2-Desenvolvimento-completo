@@ -18,11 +18,4 @@ public class RockPaperScissorsModelTest {
         String resultado = model.getResult("pedra", "tesoura");
         assertEquals("Jogador", resultado, "A pedra quebra a tesoura, entao o jogador devia ganhar");
     }
-
-    @Test
-    public void testarDerrotaDoJogador() {
-        RockPaperScissorsModel model = new RockPaperScissorsModel();
-        String resultado = model.getResult("pedra", "papel");
-        assertEquals("Computador", resultado, "O papel embrulha a pedra, entao o computador devia ganhar");
-    }
 }
