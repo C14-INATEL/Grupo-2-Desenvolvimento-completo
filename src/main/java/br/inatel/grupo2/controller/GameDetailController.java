@@ -24,6 +24,7 @@ public class GameDetailController {
 
         switch (currentGame) {
             case "Pedra, Papel e Tesoura" -> GameHubApplication.showRockPaperScissorsScreen();
+            case "Campo Minado" -> GameHubApplication.showMinesweeperScreen();
             default -> {} // outros jogos futuros
         }
     }
