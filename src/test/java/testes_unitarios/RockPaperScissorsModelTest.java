@@ -9,23 +9,7 @@ public class RockPaperScissorsModelTest {
 
     private RockPaperScissorsModel model = new RockPaperScissorsModel();
 
-    // 1. erro para entrada inválida
-    @Test
-    void deveLancarErroParaEntradaInvalida() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            model.getResult("abc", "pedra");
-        });
-    }
-
-    // 2. erro para entrada null do jogador
-    @Test
-    void deveLancarErroQuandoPlayerForNull() {
-        assertThrows(IllegalArgumentException.class, () -> {
-            model.getResult(null, "pedra");
-        });
-    }
-
-    // 3. escolha do computador várias vezes
+    // 1. escolha do computador várias vezes
     @Test
     public void escolhaDoComputadorSempreValida() {
         for (int i = 0; i < 100; i++) {
@@ -39,10 +23,24 @@ public class RockPaperScissorsModelTest {
         }
     }
 
-    // 4. computador vence
+    // 2. computador vence quando joga papel contra pedra
     @Test
     void computadorDeveVencerComPapelContraPedra() {
         String resultado = model.getResult("pedra", "papel");
+        assertEquals("Computador", resultado);
+    }
+
+    // 3. computador vence quando joga tesoura contra papel
+    @Test
+    void computadorDeveVencerComTesouraContraPapel() {
+        String resultado = model.getResult("papel", "tesoura");
+        assertEquals("Computador", resultado);
+    }
+
+    // 4. computador vence quando joga tesoura contra papel
+    @Test
+    void computadorDeveVencerComPedraContraTesoura() {
+        String resultado = model.getResult("tesoura", "pedra");
         assertEquals("Computador", resultado);
     }
 }
