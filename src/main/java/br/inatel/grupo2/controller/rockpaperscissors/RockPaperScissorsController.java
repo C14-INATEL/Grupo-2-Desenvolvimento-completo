@@ -16,12 +16,24 @@ public class RockPaperScissorsController {
 
         while (playing) {
 
-            System.out.print("Escolha (pedra, papel, tesoura): ");
-            String player = scanner.nextLine().toLowerCase();
+            String player;
+            while (true) {
+                System.out.print("Escolha (pedra, papel, tesoura): ");
+                player = scanner.nextLine().trim().toLowerCase();
 
-            if (!player.equals("pedra") && !player.equals("papel") && !player.equals("tesoura")) {
-                System.out.println("Opção inválida!");
-                continue;
+                if (player.isEmpty()) {
+                    continue;
+                }
+
+                if (!player.equals("pedra") &&
+                        !player.equals("papel") &&
+                        !player.equals("tesoura")) {
+
+                    System.out.println("Opção inválida!");
+                    continue;
+                }
+
+                break;
             }
 
             String computer = model.getComputerChoice();
@@ -31,20 +43,35 @@ public class RockPaperScissorsController {
 
             String result = model.getResult(player, computer);
 
-            if (result.equals("Empate")) {
-                System.out.println("Empate!");
-            } else if (result.equals("Jogador")) {
-                System.out.println("Você venceu!");
-            } else {
-                System.out.println("Você perdeu!");
+            switch (result) {
+                case "Empate":
+                    System.out.println("Empate!");
+                    break;
+                case "Jogador":
+                    System.out.println("Você venceu!");
+                    break;
+                default:
+                    System.out.println("Você perdeu!");
             }
 
-            System.out.print("Jogar novamente? (s/n): ");
-            if (!scanner.nextLine().equalsIgnoreCase("s")) {
-                playing = false;
+            while (true) {
+                System.out.print("Jogar novamente? (s/n): ");
+                String resposta = scanner.nextLine().trim().toLowerCase();
+
+                if (resposta.equals("s")) {
+                    break;
+                } else if (resposta.equals("n")) {
+                    playing = false;
+                    break;
+                } else {
+                    System.out.println("Digite apenas 's' ou 'n'");
+                }
             }
 
             System.out.println();
         }
+
+        scanner.close();
+        System.out.println("Jogo encerrado.");
     }
 }
