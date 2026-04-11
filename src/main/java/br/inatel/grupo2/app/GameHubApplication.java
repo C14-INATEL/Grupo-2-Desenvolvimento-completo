@@ -1,5 +1,6 @@
 package br.inatel.grupo2.app;
 
+import br.inatel.grupo2.controller.GameDetailController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -25,6 +26,30 @@ public class GameHubApplication extends Application {
 
     public static void showRockPaperScissorsScreen() {
         showScreen("rock-paper-scissors-view.fxml", "Pedra, Papel e Tesoura");
+    }
+
+    public static void showMinesweeperScreen() {
+        showScreen("minesweeper-view.fxml", "Campo Minado");
+    }
+
+    public static void showGameDetailScreen(String gameName, String icon, String description) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(GameHubApplication.class.getResource("game-detail-view.fxml"));
+            Parent root = fxmlLoader.load();
+
+            GameDetailController controller = fxmlLoader.getController();
+            controller.setGame(gameName, icon, description);
+
+            Scene scene = new Scene(root);
+            scene.getStylesheets().add(GameHubApplication.class.getResource("app.css").toExternalForm());
+
+            primaryStage.setTitle(gameName);
+            primaryStage.setScene(scene);
+            primaryStage.sizeToScene();
+            primaryStage.show();
+        } catch (IOException e) {
+            throw new IllegalStateException("Nao foi possivel carregar a tela de detalhes do jogo", e);
+        }
     }
 
     private static void showScreen(String resourceName, String title) {

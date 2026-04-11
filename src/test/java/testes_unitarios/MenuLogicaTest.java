@@ -47,9 +47,9 @@ public class MenuLogicaTest {
         ObservableList<String> lista = (ObservableList<String>) field.get(controller);
 
         // Verifica se os nomes batem exatamente com o que está no Controller
-        assertTrue(lista.contains("Pedra, Papel e Tesoura"));
-        assertTrue(lista.contains("Campo Minado"));
-        assertTrue(lista.contains("Jogo da Velha"));
+        assertTrue(lista.contains("\uD83E\uDEA8  Pedra, Papel e Tesoura"));
+        assertTrue(lista.contains("\uD83D\uDCA3  Campo Minado"));
+        assertTrue(lista.contains("\u274C  Jogo da Velha"));
     }
 
     // 4. Teste extra: Validação de nome válido

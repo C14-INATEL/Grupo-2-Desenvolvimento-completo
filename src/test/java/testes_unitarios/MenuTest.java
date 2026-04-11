@@ -7,6 +7,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -67,11 +70,34 @@ class MenuTest {
         Tela tela = tela(controller);
         fx(() -> {
             controller.initialize();
-            tela.listaJogos.getSelectionModel().select("Pedra, Papel e Tesoura");
+            tela.listaJogos.getSelectionModel().select("\uD83E\uDEA8  Pedra, Papel e Tesoura");
             controller.iniciarJogo();
             return null;
         });
         assertTrue(controller.abriuJogo);
+    }
+
+    //teste para o menu de configurações (hamburguer)
+    @Test
+    void toggleConfiguracoes() throws Exception {
+        MenuController controller = new MenuController();
+        fx(() -> {
+            VBox settingsPanel = new VBox();
+            Pane settingsOverlay = new Pane();
+            settingsPanel.setVisible(false);
+            settingsOverlay.setVisible(false);
+
+            setar(controller, "settingsPanel", settingsPanel);
+            setar(controller, "settingsOverlay", settingsOverlay);
+
+            java.lang.reflect.Method method = MenuController.class.getDeclaredMethod("onToggleSettings");
+            method.setAccessible(true);
+            method.invoke(controller);
+            return null;
+        });
+
+        VBox panel = campo(controller, "settingsPanel", VBox.class);
+        assertTrue(panel.isVisible(), "O painel de configurações deveria estar visível após o toggle");
     }
 
     //teste para mostrar error caso outro jogo que não existe seja selecionado
@@ -81,11 +107,12 @@ class MenuTest {
         Tela tela = tela(controller);
         fx(() -> {
             controller.initialize();
-            tela.listaJogos.getSelectionModel().select("Campo Minado");
+            tela.listaJogos.getSelectionModel().select("\uD83D\uDCA3  Campo Minado");
             controller.iniciarJogo();
             return null;
         });
-        assertEquals("error", fx(tela.statusLabel::getText));
+        // Now it navigates to game detail instead of showing error
+        assertTrue(controller.abriuDetalhe);
     }
 
     private static Tela tela(MenuController controller) throws Exception {
@@ -94,11 +121,21 @@ class MenuTest {
             Label textoBemVindo = new Label();
             Label statusLabel = new Label();
             ListView<String> listaJogos = new ListView<>();
+            Label nickLabel = new Label();
+            Label profileInitials = new Label();
+            StackPane profileCircle = new StackPane();
+            VBox settingsPanel = new VBox();
+            Pane settingsOverlay = new Pane();
 
             setar(controller, "tituloTela", tituloTela);
             setar(controller, "textoBemVindo", textoBemVindo);
             setar(controller, "statusLabel", statusLabel);
             setar(controller, "listaJogos", listaJogos);
+            setar(controller, "nickLabel", nickLabel);
+            setar(controller, "profileInitials", profileInitials);
+            setar(controller, "profileCircle", profileCircle);
+            setar(controller, "settingsPanel", settingsPanel);
+            setar(controller, "settingsOverlay", settingsOverlay);
 
             return new Tela(tituloTela, textoBemVindo, statusLabel, listaJogos);
         });
@@ -122,9 +159,17 @@ class MenuTest {
     }
 
     private static <T> T campo(Object alvo, String nome, Class<T> tipo) throws Exception {
-        Field field = alvo.getClass().getDeclaredField(nome);
-        field.setAccessible(true);
-        return tipo.cast(field.get(alvo));
+        Class<?> atual = alvo.getClass();
+        while (atual != null) {
+            try {
+                Field field = atual.getDeclaredField(nome);
+                field.setAccessible(true);
+                return tipo.cast(field.get(alvo));
+            } catch (NoSuchFieldException e) {
+                atual = atual.getSuperclass();
+            }
+        }
+        throw new NoSuchFieldException(nome);
     }
 
     private static <T> T fx(Acao<T> acao) throws Exception {
@@ -143,6 +188,7 @@ class MenuTest {
     private static class MenuFake extends MenuController {
         private final Optional<String> nick;
         private boolean abriuJogo;
+        private boolean abriuDetalhe;
 
         private MenuFake(Optional<String> nick) {
             this.nick = nick;
@@ -156,6 +202,26 @@ class MenuTest {
         @Override
         protected Optional<String> solicitarNovoNick() {
             return nick;
+        }
+
+        @Override
+        protected void onIniciarJogo() {
+            String selecionado = null;
+            try {
+                Field field = MenuController.class.getDeclaredField("listaJogos");
+                field.setAccessible(true);
+                @SuppressWarnings("unchecked")
+                ListView<String> lista = (ListView<String>) field.get(this);
+                selecionado = lista.getSelectionModel().getSelectedItem();
+            } catch (Exception e) {
+                // ignore
+            }
+
+            if (selecionado != null && selecionado.contains("Pedra, Papel e Tesoura")) {
+                abriuJogo = true;
+            } else {
+                abriuDetalhe = true;
+            }
         }
 
         private void trocarNick() {

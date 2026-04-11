@@ -6,29 +6,75 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.Pane?>
 
-<VBox alignment="TOP_CENTER" prefHeight="520.0" prefWidth="720.0" spacing="16.0" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="br.inatel.grupo2.controller.MenuController">
-    <padding>
-        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
-    </padding>
+<StackPane prefHeight="520.0" prefWidth="720.0" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="br.inatel.grupo2.controller.MenuController">
 
-    <Label fx:id="tituloTela" text="GAME HUB" styleClass="screen-title"/>
-    <Label text="BY grupo 2." styleClass="helper-text"/>
+    <!-- Main Content -->
+    <VBox alignment="TOP_CENTER" spacing="16.0">
+        <padding>
+            <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
+        </padding>
 
-    <Label fx:id="textoBemVindo" styleClass="screen-subtitle"/>
+        <!-- Top Bar: Hamburger + Title -->
+        <HBox alignment="CENTER_LEFT" spacing="12.0">
+            <Button text="☰" onAction="#onToggleSettings" styleClass="hamburger-btn"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label fx:id="tituloTela" text="GAME HUB" styleClass="screen-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Region prefWidth="40"/>
+        </HBox>
 
-    <Label text="Escolha um jogo da lista para abrir a experiencia visual." styleClass="helper-text"/>
+        <Label text="GRUPO 2" styleClass="brand-tag"/>
+        <Label fx:id="textoBemVindo" styleClass="screen-subtitle"/>
 
-    <ListView fx:id="listaJogos" prefHeight="220.0" prefWidth="340.0" styleClass="game-list"/>
+        <Label text="Selecione um título abaixo" styleClass="helper-text"/>
 
-    <HBox spacing="12.0" alignment="CENTER">
-        <Button text="Jogar" onAction="#onIniciarJogo" styleClass="primary-button"/>
-        <Button text="Novo Jogo" onAction="#onAdicionarJogo" styleClass="secondary-button"/>
-        <Button text="Remover" onAction="#onRemoverJogo" styleClass="secondary-button"/>
-    </HBox>
+        <ListView fx:id="listaJogos" prefHeight="220.0" prefWidth="340.0" styleClass="game-list"/>
 
-    <Button text="Mudar Meu Nick" onAction="#onTrocarNick" styleClass="ghost-button"/>
+        <HBox spacing="12.0" alignment="CENTER">
+            <Button text="▶  Jogar" onAction="#onIniciarJogo" styleClass="primary-button"/>
+            <Button text="+  Novo Jogo" onAction="#onAdicionarJogo" styleClass="secondary-button"/>
+            <Button text="−  Remover" onAction="#onRemoverJogo" styleClass="secondary-button"/>
+        </HBox>
 
-    <Label fx:id="statusLabel" text="Selecione um jogo e clique em Jogar." styleClass="status-label" wrapText="true"/>
-</VBox>
+        <Label fx:id="statusLabel" text="Nenhum jogo selecionado." styleClass="status-label" wrapText="true"/>
+    </VBox>
+
+    <!-- Settings Overlay (click to close) -->
+    <Pane fx:id="settingsOverlay" styleClass="settings-overlay" visible="false"
+          onMouseClicked="#onToggleSettings"/>
+
+    <!-- Settings Panel (sidebar) -->
+    <VBox fx:id="settingsPanel" alignment="TOP_LEFT" maxWidth="260" styleClass="settings-panel"
+          visible="false" StackPane.alignment="CENTER_LEFT">
+
+        <HBox alignment="CENTER_LEFT" spacing="8.0">
+            <Label text="Configurações" styleClass="settings-title"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button text="✕" onAction="#onToggleSettings" styleClass="settings-close-btn"/>
+        </HBox>
+
+        <Region prefHeight="12"/>
+
+        <!-- Profile Section -->
+        <VBox alignment="CENTER" spacing="8.0">
+            <StackPane fx:id="profileCircle" styleClass="profile-circle">
+                <Label fx:id="profileInitials" text="P1" styleClass="profile-initials"/>
+            </StackPane>
+            <Label fx:id="nickLabel" text="Player 1" styleClass="nick-label"/>
+        </VBox>
+
+        <Region prefHeight="8"/>
+
+        <Region styleClass="dark-separator"/>
+
+        <Region prefHeight="8"/>
+
+        <Button text="✏  Mudar Nick" onAction="#onTrocarNick" styleClass="settings-item" maxWidth="1.7976931348623157E308"/>
+        <Button text="🖼  Mudar Imagem" onAction="#onMudarImagem" styleClass="settings-item" maxWidth="1.7976931348623157E308"/>
+    </VBox>
+</StackPane>
