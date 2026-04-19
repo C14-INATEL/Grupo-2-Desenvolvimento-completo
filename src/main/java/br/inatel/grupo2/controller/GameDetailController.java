@@ -1,6 +1,7 @@
 package br.inatel.grupo2.controller;
 
-import br.inatel.grupo2.app.GameHubApplication;
+import br.inatel.grupo2.navigation.GameNavigator;
+import br.inatel.grupo2.navigation.JavaFxGameNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -10,6 +11,7 @@ public class GameDetailController {
     @FXML private Label gameDescription;
 
     private String currentGame;
+    private GameNavigator navigator = new JavaFxGameNavigator();
 
     public void setGame(String name, String icon, String description) {
         this.currentGame = name;
@@ -23,14 +25,19 @@ public class GameDetailController {
         if (currentGame == null) return;
 
         switch (currentGame) {
-            case "Pedra, Papel e Tesoura" -> GameHubApplication.showRockPaperScissorsScreen();
-            case "Campo Minado" -> GameHubApplication.showMinesweeperScreen();
+            case "Pedra, Papel e Tesoura" -> navigator.showRockPaperScissorsScreen();
+            case "Campo Minado" -> navigator.showMinesweeperScreen();
+            case "Jogo da Velha" -> navigator.showTicTacToeScreen();
             default -> {} // outros jogos futuros
         }
     }
 
     @FXML
     protected void onBack() {
-        GameHubApplication.showMenuScreen();
+        navigator.showMenuScreen();
+    }
+
+    public void setNavigator(GameNavigator navigator) {
+        this.navigator = navigator;
     }
 }

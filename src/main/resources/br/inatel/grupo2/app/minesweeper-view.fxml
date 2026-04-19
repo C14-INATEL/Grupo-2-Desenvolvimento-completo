@@ -1,9 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<GridPane fx:id="grid"
-          xmlns:fx="http://javafx.com/fxml"
-          fx:controller="br.inatel.grupo2.controller.minesweeper.MinesweeperController"
-          hgap="2"
-          vgap="2"/>
+<BorderPane prefHeight="650.0" prefWidth="860.0" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.inatel.grupo2.controller.minesweeper.MinesweeperController">
+    <padding>
+        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="12.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button text="Voltar" onAction="#onBack" styleClass="ghost-button"/>
+                <Label text="Campo Minado" styleClass="screen-title"/>
+            </HBox>
+            <Label text="Revele as casas seguras sem encontrar uma mina." styleClass="screen-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="22.0">
+            <HBox alignment="CENTER" spacing="18.0">
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card mine-info-card">
+                    <Label text="STATUS" styleClass="card-label"/>
+                    <Label fx:id="statusLabel" text="Partida em andamento" styleClass="choice-value"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card mine-info-card">
+                    <Label text="MINAS" styleClass="card-label"/>
+                    <Label fx:id="minesLabel" text="10" styleClass="score-number"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card mine-info-card">
+                    <Label text="SEGURAS" styleClass="card-label"/>
+                    <Label fx:id="revealedLabel" text="0/54" styleClass="score-number"/>
+                </VBox>
+            </HBox>
+
+            <VBox alignment="CENTER" spacing="16.0" styleClass="minesweeper-board-card">
+                <GridPane fx:id="grid" alignment="CENTER" hgap="8.0" vgap="8.0"/>
+            </VBox>
+
+            <Label fx:id="resultLabel" styleClass="result-label" text="Aguardando jogada..." wrapText="true"/>
+
+            <Button fx:id="retryButton" managed="false" mnemonicParsing="false" onAction="#onNewGame"
+                    styleClass="retry-icon-button" text="↻" visible="false"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="12.0">
+            <Label text="Tabuleiro 8x8 com 10 minas" styleClass="helper-text"/>
+            <Button text="Nova partida" onAction="#onNewGame" styleClass="secondary-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

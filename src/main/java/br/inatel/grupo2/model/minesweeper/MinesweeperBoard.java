@@ -68,4 +68,5 @@ public class MinesweeperBoard {
 
     public int getRows() { return rows; }
     public int getCols() { return cols; }
+    public int getMines() { return mines; }
 }

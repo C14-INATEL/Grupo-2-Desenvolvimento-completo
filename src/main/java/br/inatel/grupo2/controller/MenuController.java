@@ -1,6 +1,7 @@
 package br.inatel.grupo2.controller;
 
-import br.inatel.grupo2.app.GameHubApplication;
+import br.inatel.grupo2.navigation.GameNavigator;
+import br.inatel.grupo2.navigation.JavaFxGameNavigator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -51,10 +52,11 @@ public class MenuController {
     private static final Map<String, String> GAME_DESCRIPTIONS = Map.of(
             "Pedra, Papel e Tesoura", "O cl\u00E1ssico jogo de estrat\u00E9gia! Escolha pedra, papel ou tesoura e desafie o computador. Acompanhe seu placar em tempo real.",
             "Campo Minado", "Encontre todas as minas escondidas sem detonar nenhuma. Teste sua l\u00F3gica e habilidade!",
-            "Jogo da Velha", "O famoso jogo da velha! Marque tr\u00EAs em linha para vencer. Em breve dispon\u00EDvel!"
+            "Jogo da Velha", "Marque tres simbolos em linha para vencer. Jogue contra o computador ou desafie outra pessoa no mesmo teclado."
     );
 
     private String nickUsuario = "Player 1";
+    private GameNavigator navigator = new JavaFxGameNavigator();
 
     @FXML
     public void initialize() {
@@ -77,7 +79,7 @@ public class MenuController {
         String icon = GAME_ICONS.getOrDefault(realName, "\uD83C\uDFAE");
         String desc = GAME_DESCRIPTIONS.getOrDefault(realName, "Sem descri\u00E7\u00E3o dispon\u00EDvel.");
 
-        GameHubApplication.showGameDetailScreen(realName, icon, desc);
+        navigator.showGameDetailScreen(realName, icon, desc);
     }
 
     @FXML
@@ -136,7 +138,11 @@ public class MenuController {
     }
 
     protected void abrirPedraPapelTesoura() {
-        GameHubApplication.showRockPaperScissorsScreen();
+        navigator.showRockPaperScissorsScreen();
+    }
+
+    public void setNavigator(GameNavigator navigator) {
+        this.navigator = navigator;
     }
 
     protected Optional<String> solicitarNovoNick() {

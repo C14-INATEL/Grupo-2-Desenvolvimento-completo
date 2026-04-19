@@ -32,6 +32,10 @@ public class GameHubApplication extends Application {
         showScreen("minesweeper-view.fxml", "Campo Minado");
     }
 
+    public static void showTicTacToeScreen() {
+        showScreen("tictactoe-view.fxml", "Jogo da Velha");
+    }
+
     public static void showGameDetailScreen(String gameName, String icon, String description) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(GameHubApplication.class.getResource("game-detail-view.fxml"));

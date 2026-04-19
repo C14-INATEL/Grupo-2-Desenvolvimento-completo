@@ -1,7 +1,8 @@
 package br.inatel.grupo2.controller.rockpaperscissors;
 
-import br.inatel.grupo2.app.GameHubApplication;
 import br.inatel.grupo2.model.rockpaperscissors.RockPaperScissorsModel;
+import br.inatel.grupo2.navigation.GameNavigator;
+import br.inatel.grupo2.navigation.JavaFxGameNavigator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 
@@ -16,7 +17,8 @@ public class RockPaperScissorsViewController {
     @FXML private Label drawsLabel;
     @FXML private Label roundLabel;
 
-    private final RockPaperScissorsModel model = new RockPaperScissorsModel();
+    private RockPaperScissorsModel model = new RockPaperScissorsModel();
+    private GameNavigator navigator = new JavaFxGameNavigator();
 
     private int playerScore;
     private int computerScore;
@@ -61,7 +63,15 @@ public class RockPaperScissorsViewController {
 
     @FXML
     protected void onBack() {
-        GameHubApplication.showMenuScreen();
+        navigator.showMenuScreen();
+    }
+
+    public void setNavigator(GameNavigator navigator) {
+        this.navigator = navigator;
+    }
+
+    public void setModel(RockPaperScissorsModel model) {
+        this.model = model;
     }
 
     private void playRound(String playerChoice) {

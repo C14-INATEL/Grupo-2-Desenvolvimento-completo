@@ -6,12 +6,20 @@ public class Battleships {
     boolean[][] acertos = new boolean[10][10];
 
     int i;
-    Random r = new Random();
+    Random r;
 
     private int inicioX;
     private int inicioY;
     private int comprimento;
     private boolean vertical; // 0 - horizontal 1 - vertical
+
+    public Battleships() {
+        this(new Random());
+    }
+
+    public Battleships(Random random) {
+        this.r = random;
+    }
 
     // confirma se nao ha superposicao de navios e se o navio cabe no campo
     private boolean podeColocarNavio(int x, int y, int comprimento, boolean vertical) 

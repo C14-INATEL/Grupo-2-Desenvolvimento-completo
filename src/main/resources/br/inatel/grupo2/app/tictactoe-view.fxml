@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="620.0" prefWidth="820.0" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.inatel.grupo2.controller.tictactoe.TicTacToeController">
+    <padding>
+        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="12.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button text="Voltar" onAction="#onBack" styleClass="ghost-button"/>
+                <Label text="Jogo da Velha" styleClass="screen-title"/>
+            </HBox>
+            <Label fx:id="subtitleLabel" text="Modo atual: voce contra o computador" styleClass="screen-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="22.0">
+            <HBox alignment="CENTER" spacing="16.0">
+                <Button fx:id="computerModeButton" mnemonicParsing="false" onAction="#onChooseComputerMode"
+                        styleClass="choice-button mode-button" text="Contra CPU"/>
+                <Button fx:id="localModeButton" mnemonicParsing="false" onAction="#onChooseLocalMode"
+                        styleClass="choice-button mode-button" text="2 Jogadores"/>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="20.0">
+                <VBox alignment="CENTER" spacing="10.0" styleClass="choice-card">
+                    <Label text="STATUS" styleClass="card-label"/>
+                    <Label fx:id="turnLabel" styleClass="choice-value" text="Vez do jogador X"/>
+                </VBox>
+
+                <Label text="3x3" styleClass="vs-label"/>
+
+                <VBox alignment="CENTER" spacing="10.0" styleClass="choice-card">
+                    <Label text="OBJETIVO" styleClass="card-label"/>
+                    <Label text="Tres em linha" styleClass="choice-value"/>
+                </VBox>
+            </HBox>
+
+            <GridPane alignment="CENTER" hgap="10.0" vgap="10.0" styleClass="tic-board">
+                <Button fx:id="cell00" onAction="#onCell00" styleClass="tic-cell" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <Button fx:id="cell01" onAction="#onCell01" styleClass="tic-cell" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                <Button fx:id="cell02" onAction="#onCell02" styleClass="tic-cell" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                <Button fx:id="cell10" onAction="#onCell10" styleClass="tic-cell" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <Button fx:id="cell11" onAction="#onCell11" styleClass="tic-cell" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                <Button fx:id="cell12" onAction="#onCell12" styleClass="tic-cell" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                <Button fx:id="cell20" onAction="#onCell20" styleClass="tic-cell" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <Button fx:id="cell21" onAction="#onCell21" styleClass="tic-cell" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                <Button fx:id="cell22" onAction="#onCell22" styleClass="tic-cell" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+            </GridPane>
+
+            <Label fx:id="resultLabel" styleClass="result-label" text="Aguardando jogada..." wrapText="true"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox alignment="CENTER" spacing="16.0">
+            <HBox alignment="CENTER" spacing="18.0">
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="X" styleClass="card-label"/>
+                    <Label fx:id="xScoreLabel" styleClass="score-number" text="0"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="O" styleClass="card-label"/>
+                    <Label fx:id="oScoreLabel" styleClass="score-number" text="0"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="6.0" styleClass="score-card">
+                    <Label text="EMPATES" styleClass="card-label"/>
+                    <Label fx:id="drawsLabel" styleClass="score-number" text="0"/>
+                </VBox>
+            </HBox>
+
+            <HBox alignment="CENTER" spacing="12.0">
+                <Label fx:id="roundLabel" styleClass="helper-text" text="Rodadas finalizadas: 0"/>
+                <Button text="Nova rodada" onAction="#onNewRound" styleClass="secondary-button"/>
+                <Button text="Zerar placar" onAction="#onResetMatch" styleClass="secondary-button"/>
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane>
