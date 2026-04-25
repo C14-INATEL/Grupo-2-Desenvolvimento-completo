@@ -18,6 +18,7 @@ public class BattleshipsTest {
         } else {
             assertTrue(x + len <= 10, "Navio deve caber horizontalmente dentro dos limites");
         }
+
     }
 
     @Test
@@ -91,6 +92,49 @@ public class BattleshipsTest {
             }
         }
         assertTrue(foundMiss, "Deve haver pelo menos uma tentativa de acerto que seja um erro");
+    }
+
+
+    @Test
+    void testRepeatedHits() {
+        Battleships b = new Battleships();
+        b.criarBattleship();
+        int x = b.getInicioX();
+        int y = b.getInicioY();
+        // Capture System.out
+        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
+        java.io.PrintStream originalOut = System.out;
+        System.setOut(new java.io.PrintStream(outContent));
+        try {
+            b.checarAcerto(x, y); // First hit
+            outContent.reset(); // Clear output
+            b.checarAcerto(x, y); // Second hit (should print 'Já tentou essa posição!')
+        } finally {
+            System.setOut(originalOut);
+        }
+        String output = outContent.toString();
+        assertTrue(output.contains("Já tentou essa posição!"), "Deve avisar que já tentou essa posição");
+    }
+
+    @Test
+    void testOutOfBoundsHit() {
+        Battleships b = new Battleships();
+        b.criarBattleship();
+        // Capture System.out
+        java.io.ByteArrayOutputStream outContent = new java.io.ByteArrayOutputStream();
+        java.io.PrintStream originalOut = System.out;
+        System.setOut(new java.io.PrintStream(outContent));
+        try {
+            b.checarAcerto(-1, 0); // Out of bounds
+            b.checarAcerto(0, -1); // Out of bounds
+            b.checarAcerto(10, 0); // Out of bounds
+            b.checarAcerto(0, 10); // Out of bounds
+        } finally {
+            System.setOut(originalOut);
+        }
+        String output = outContent.toString();
+        int count = output.split("Coordenada fora do tabuleiro!").length - 1;
+        assertEquals(4, count, "Deve avisar que a coordenada está fora do tabuleiro para cada tentativa inválida");
     }
 
     private static int contarCelulasOcupadas(Battleships b) {
