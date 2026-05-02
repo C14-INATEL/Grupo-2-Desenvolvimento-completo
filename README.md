@@ -30,6 +30,6 @@ Para garantir o bom funcionamento das lógicas e das regras de negócio do siste
 Para rodar todos os testes que usam mock das lógicas e regras de negócio do sistema, execute o seguinte comando no terminal:
 
 ```powershell
-.\mvnw.cmd "-Dtest=mocks.*" test
+.\mvnw.cmd "-Dtest=mocks.**" test
 ```
 
