@@ -95,3 +95,34 @@ E reiniciar o estado da partida.
 Dado que o jogador esta na tela do Campo Minado  
 Quando ele clicar no botao voltar  
 Entao o sistema deve retornar ao menu principal.
+
+## US-04 - Exibir Resultado da Rodada
+
+**Como** jogador,  
+**eu quero** visualizar claramente o resultado de cada rodada apos fazer minha jogada,  
+**para que** eu saiba imediatamente se venci, perdi ou empatei.
+
+**Prioridade:** Alta  
+**Status:** Entregue  
+**Issue/Card:** SCRUM-0  
+**PR:** #14  
+**Commit:** `bd10be658801ddafb632fb8718b819fbee466400`  
+**Teste:** `RockPaperScissorsViewControllerMockTest`
+
+### Criterios de aceitacao
+
+**Cenario 1 - Exibir vitoria do jogador**  
+Dado que o jogador venceu a rodada (ex: `pedra` contra `tesoura`)  
+Quando o sistema processar o resultado  
+Entao deve exibir a mensagem `"Voce venceu a rodada."` no `resultLabel`.
+
+**Cenario 2 - Atualizar placar do jogador**  
+Dado que o jogador venceu a rodada  
+Quando o resultado for processado  
+Entao o placar do jogador deve ser incrementado em `1`  
+E o metodo `updateScoreboard()` deve ser chamado.
+
+**Cenario 3 - Atualizar quantidade de rodadas**  
+Dado que uma rodada foi finalizada  
+Quando o sistema atualizar o placar  
+Entao a quantidade de rodadas jogadas deve ser incrementada em `1`.
