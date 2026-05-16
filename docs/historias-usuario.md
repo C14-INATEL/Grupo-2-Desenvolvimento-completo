@@ -62,3 +62,36 @@ Entao o sistema deve retornar que o vencedor e o `Computador`.
 E o computador escolheu `pedra`  
 Quando o metodo `model.getResult("tesoura", "pedra")` for executado  
 Entao o sistema deve retornar que o vencedor e o `Computador`.
+
+## US-03 - Jogar Campo Minado e reiniciar a partida
+
+**Como** jogador,  
+**eu quero** clicar nas casas do campo minado e reiniciar a partida quando perder,  
+**para que** eu possa jogar novas rodadas e continuar utilizando o jogo.
+
+**Prioridade:** Alta  
+**Status:** Entregue  
+**Issue/Card:** SCRUM-0  
+**PR:** #16  
+**Commit:** `4f780255556348a01f8624ee1eee91bb69918c66`  
+**Teste:** `deveMostrarFimDeJogoAoClicarEmMina`, `deveCriarNovoTabuleiroAoClicarEmNovoJogo`, `deveVoltarParaMenuAoClicarEmVoltar`
+
+### Criterios de aceitacao
+
+**Cenario 1 - Jogador perde ao clicar em uma mina**  
+Dado que o jogador iniciou uma partida de Campo Minado  
+E clicou em uma celula contendo mina  
+Quando o sistema processa a jogada  
+Entao o jogo deve exibir a mensagem de fim de jogo  
+E o botao de reinicio deve ficar visivel.
+
+**Cenario 2 - Reiniciar partida**  
+Dado que o jogador esta em uma partida de Campo Minado  
+Quando ele clicar em `Novo Jogo`  
+Entao o sistema deve criar um novo tabuleiro  
+E reiniciar o estado da partida.
+
+**Cenario 3 - Retornar ao menu principal**  
+Dado que o jogador esta na tela do Campo Minado  
+Quando ele clicar no botao voltar  
+Entao o sistema deve retornar ao menu principal.
