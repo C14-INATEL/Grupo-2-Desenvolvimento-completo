@@ -33,3 +33,149 @@ Para rodar todos os testes que usam mock das lógicas e regras de negócio do si
 .\mvnw.cmd "-Dtest=mocks.**" test
 ```
 
+## Como rodar o Jenkins localmente
+
+O projeto possui um `Jenkinsfile` na raiz com uma pipeline simples de build. Nesta primeira versao, o Jenkins executa:
+
+```powershell
+.\mvnw.cmd -B clean compile
+```
+
+ou, quando estiver rodando em Linux:
+
+```bash
+./mvnw -B clean compile
+```
+
+### Requisitos
+
+- Docker Desktop instalado e aberto
+- Acesso a internet para baixar a imagem do Jenkins e as dependencias Maven
+- Porta `8080` livre na maquina
+
+### Subir o Jenkins com Docker
+
+No terminal, execute:
+
+```powershell
+docker pull jenkins/jenkins:lts-jdk17
+docker run -d --name grupo2-jenkins -p 8080:8080 -p 50000:50000 -e JAVA_OPTS=-Djenkins.install.runSetupWizard=false -v grupo2_jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
+```
+
+Instale os plugins basicos para Pipeline, Git, JUnit e integracao com GitHub:
+
+```powershell
+docker exec grupo2-jenkins jenkins-plugin-cli --plugins workflow-aggregator git junit github
+docker restart grupo2-jenkins
+```
+
+Depois acesse:
+
+```text
+http://localhost:8080
+```
+
+Se o Jenkins pedir login, use o usuario `admin`. A senha inicial pode ser obtida com:
+
+```powershell
+docker exec grupo2-jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+```
+
+### Criar o job da pipeline
+
+1. Clique em `New Item`.
+2. Informe o nome `grupo2-build`.
+3. Selecione `Pipeline`.
+4. Em `Pipeline`, escolha `Pipeline script from SCM`.
+5. Em `SCM`, selecione `Git`.
+6. Informe a URL do repositorio:
+
+```text
+https://github.com/C14-INATEL/Grupo-2-Desenvolvimento-completo.git
+```
+
+7. Em `Branch Specifier`, use:
+
+```text
+*/main
+```
+
+8. Em `Script Path`, use:
+
+```text
+Jenkinsfile
+```
+
+9. Salve e clique em `Build Now`.
+
+### Disparar pipeline automaticamente no push
+
+O `Jenkinsfile` possui o gatilho:
+
+```groovy
+triggers {
+    githubPush()
+}
+```
+
+Esse gatilho permite que o Jenkins execute a pipeline quando o GitHub enviar um evento de `push`.
+
+Para isso funcionar, o Jenkins precisa estar acessivel pelo GitHub. Se estiver rodando apenas em `localhost`, o GitHub nao consegue chamar o Jenkins diretamente. Nesse caso, use uma URL publica ou um tunel temporario, como ngrok.
+
+No GitHub, configure o webhook do repositorio:
+
+1. Acesse `Settings`.
+2. Entre em `Webhooks`.
+3. Clique em `Add webhook`.
+4. Em `Payload URL`, informe:
+
+```text
+http://SEU_ENDERECO_JENKINS/github-webhook/
+```
+
+Exemplo com Jenkins publicado:
+
+```text
+https://meu-jenkins.exemplo.com/github-webhook/
+```
+
+Exemplo com tunel local:
+
+```text
+https://seu-subdominio.ngrok-free.app/github-webhook/
+```
+
+5. Em `Content type`, selecione `application/json`.
+6. Em eventos, escolha `Just the push event`.
+7. Mantenha o webhook ativo e salve.
+
+No Jenkins, o job tambem deve estar configurado para usar o `Jenkinsfile` do repositorio. Quando houver push na branch configurada, o GitHub chama o endpoint `/github-webhook/` e o Jenkins agenda uma nova build.
+
+### Acessar build e artefatos
+
+Com o Jenkins rodando localmente, acesse:
+
+```text
+http://localhost:8080/job/grupo2-build/
+```
+
+Para ver o log da build, abra a build desejada e clique em `Console Output`.
+
+Para ver os artefatos compilados, abra a build desejada e clique em `Artifacts`.
+
+### Parar e iniciar novamente
+
+Para parar o Jenkins:
+
+```powershell
+docker stop grupo2-jenkins
+```
+
+Para iniciar novamente:
+
+```powershell
+docker start grupo2-jenkins
+```
+
+Observacao: os testes JavaFX podem exigir configuracao grafica adicional quando o Jenkins roda em container Linux. Por isso, a pipeline inicial valida apenas a compilacao do projeto.
+
