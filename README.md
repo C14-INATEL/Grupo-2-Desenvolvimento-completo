@@ -62,10 +62,10 @@ docker pull jenkins/jenkins:lts-jdk17
 docker run -d --name grupo2-jenkins -p 8080:8080 -p 50000:50000 -e JAVA_OPTS=-Djenkins.install.runSetupWizard=false -v grupo2_jenkins_home:/var/jenkins_home jenkins/jenkins:lts-jdk17
 ```
 
-Instale os plugins basicos para Pipeline, Git, JUnit e integracao com GitHub:
+Instale os plugins basicos para Pipeline, Git e JUnit:
 
 ```powershell
-docker exec grupo2-jenkins jenkins-plugin-cli --plugins workflow-aggregator git junit github
+docker exec grupo2-jenkins jenkins-plugin-cli --plugins workflow-aggregator git junit
 docker restart grupo2-jenkins
 ```
 
@@ -107,49 +107,6 @@ Jenkinsfile
 ```
 
 9. Salve e clique em `Build Now`.
-
-### Disparar pipeline automaticamente no push
-
-O `Jenkinsfile` possui o gatilho:
-
-```groovy
-triggers {
-    githubPush()
-}
-```
-
-Esse gatilho permite que o Jenkins execute a pipeline quando o GitHub enviar um evento de `push`.
-
-Para isso funcionar, o Jenkins precisa estar acessivel pelo GitHub. Se estiver rodando apenas em `localhost`, o GitHub nao consegue chamar o Jenkins diretamente. Nesse caso, use uma URL publica ou um tunel temporario, como ngrok.
-
-No GitHub, configure o webhook do repositorio:
-
-1. Acesse `Settings`.
-2. Entre em `Webhooks`.
-3. Clique em `Add webhook`.
-4. Em `Payload URL`, informe:
-
-```text
-http://SEU_ENDERECO_JENKINS/github-webhook/
-```
-
-Exemplo com Jenkins publicado:
-
-```text
-https://meu-jenkins.exemplo.com/github-webhook/
-```
-
-Exemplo com tunel local:
-
-```text
-https://seu-subdominio.ngrok-free.app/github-webhook/
-```
-
-5. Em `Content type`, selecione `application/json`.
-6. Em eventos, escolha `Just the push event`.
-7. Mantenha o webhook ativo e salve.
-
-No Jenkins, o job tambem deve estar configurado para usar o `Jenkinsfile` do repositorio. Quando houver push na branch configurada, o GitHub chama o endpoint `/github-webhook/` e o Jenkins agenda uma nova build.
 
 ### Acessar build e artefatos
 
