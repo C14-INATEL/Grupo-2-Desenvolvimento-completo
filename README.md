@@ -136,3 +136,18 @@ docker start grupo2-jenkins
 
 Observacao: os testes JavaFX podem exigir configuracao grafica adicional quando o Jenkins roda em container Linux. Por isso, a pipeline inicial valida apenas a compilacao do projeto.
 
+## 🤖 Uso de Inteligência Artificial
+
+[cite_start]Em conformidade com as diretrizes do projeto, declaramos o uso consciente e transparente de ferramentas de IA durante o desenvolvimento[cite: 89].
+
+### Modelos Utilizados
+* [cite_start]**Gemini / ChatGPT / Claude:** Utilizados para auxiliar na arquitetura do projeto, modelagem do banco de dados e criação de scripts de automação[cite: 93, 94].
+
+### Dinâmica de Uso
+* [cite_start]A IA foi utilizada de forma colaborativa para pair programming, geração de templates de testes unitários e desenvolvimento de scripts auxiliares para a pipeline de CI/CD.
+* [cite_start]**O que não foi feito por IA:** Toda a lógica de negócio central, regras de escopo específicas e a integração final dos módulos foram desenvolvidas manualmente pelo grupo[cite: 97].
+
+### Exemplos de Prompts Reais
+1. *"Como estruturar uma pipeline declarativa no Jenkins que filtre comandos por sistema operacional?"* -> **Resultado:** Aceito e adaptado no `Jenkinsfile`.
+2. *"Crie um script em Bash para validar a existência de arquivos específicos de documentação em um repositório."* -> **Resultado:** Aceito e refinado no script `validate_docs.sh`.
+3. [cite_start]*"Analise o documento enviado, logo após isso, liste cada tópico fazendo um check-list para ser seguido no decorrer do processo."* [cite: 95]
