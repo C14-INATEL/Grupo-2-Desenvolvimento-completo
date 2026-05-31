@@ -37,11 +37,11 @@ pipeline {
                     echo 'Iniciando validacao do RockPaperScissors...'
                     if (isUnix()) {
                         catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
-                            sh 'chmod +x ./scripts/validade_rockpaperscissors.sh'
-                            sh './scripts/validade_rockpaperscissors.sh'
+                            sh 'chmod +x ./scripts/validate_rockpaperscissors.sh'
+                            sh './scripts/validate_rockpaperscissors.sh'
                         }
                     } else {
-                        bat '"%PROGRAMFILES%\\Git\\bin\\sh.exe" ./scripts/validade_rockpaperscissors.sh'
+                        bat '"%PROGRAMFILES%\\Git\\bin\\sh.exe" ./scripts/validate_rockpaperscissors.sh'
                     }
                 }
             }
