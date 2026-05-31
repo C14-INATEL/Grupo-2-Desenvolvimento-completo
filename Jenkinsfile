@@ -15,16 +15,33 @@ pipeline {
             }
         }
 
-        stage('Validação do README e Docs') {
+        stage('Validacao do README e Docs') {
             steps {
                 script {
-                    echo 'Iniciando a checagem automatizada da documentação...'
-
+                    echo 'Iniciando a checagem automatizada da documentacao...'
                     if (isUnix()) {
-                        sh 'chmod +x ./scripts/validate_docs.sh'
-                        sh './scripts/validate_docs.sh'
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            sh 'chmod +x ./scripts/validate_docs.sh'
+                            sh './scripts/validate_docs.sh'
+                        }
                     } else {
                         bat '"%PROGRAMFILES%\\Git\\bin\\sh.exe" ./scripts/validate_docs.sh'
+                    }
+                }
+            }
+        }
+
+        stage('Validacao RockPaperScissors') {
+            steps {
+                script {
+                    echo 'Iniciando validacao do RockPaperScissors...'
+                    if (isUnix()) {
+                        catchError(buildResult: 'UNSTABLE', stageResult: 'FAILURE') {
+                            sh 'chmod +x ./scripts/validade_rockpaperscissors.sh'
+                            sh './scripts/validade_rockpaperscissors.sh'
+                        }
+                    } else {
+                        bat '"%PROGRAMFILES%\\Git\\bin\\sh.exe" ./scripts/validade_rockpaperscissors.sh'
                     }
                 }
             }
