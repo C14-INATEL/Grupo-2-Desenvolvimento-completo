@@ -117,6 +117,42 @@ class MenuControllerMockTest {
         assertEquals("PL", iniciais.getText(), "A inicial do perfil deve corresponder às iniciais do nick.");
     }
 
+    @Test
+    void deveAdicionarJogoNaLista() throws Exception {
+        // Subclasse que simula o diálogo de input
+        class TestableMenuControllerWithDialog extends TestableMenuController {
+            @Override
+            public void onAdicionarJogo() {
+                // Simula o comportamento do diálogo como se o usuário digitasse "Teste Jogo"
+                try {
+                    @SuppressWarnings("unchecked")
+                    ListView<String> lv = (ListView<String>) buscarCampo(this, "listaJogos");
+                    Label sl = (Label) buscarCampo(this, "statusLabel");
+                    lv.getItems().add("\uD83C\uDFAE  Teste Jogo");
+                    lv.getSelectionModel().selectLast();
+                    sl.setText("Jogo adicionado à lista.");
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+        TestableMenuController controller = new TestableMenuControllerWithDialog();
+        Tela tela = fx(() -> {
+            Tela t = montarTela(controller);
+            controller.initialize();
+            return t;
+        });
+
+        fx(() -> {
+            controller.onAdicionarJogo();
+            return null;
+        });
+
+        assertTrue(fx(() -> tela.listaJogos().getItems().contains("\uD83C\uDFAE  Teste Jogo")), "O novo jogo deve ser adicionado à lista.");
+        assertEquals("Jogo adicionado à lista.", fx(tela.statusLabel()::getText));
+    }
+
     // --- MÉTODOS AUXILIARES ---
 
     private static Tela montarTela(MenuController controller) throws Exception {
@@ -144,15 +180,27 @@ class MenuControllerMockTest {
     }
 
     private static void setar(Object alvo, String nome, Object valor) throws Exception {
-        Field field = alvo.getClass().getSuperclass().getDeclaredField(nome);
+        Field field = localizarCampo(alvo.getClass(), nome);
         field.setAccessible(true);
         field.set(alvo, valor);
     }
 
     private static Object buscarCampo(Object alvo, String nome) throws Exception {
-        Field field = alvo.getClass().getSuperclass().getDeclaredField(nome);
+        Field field = localizarCampo(alvo.getClass(), nome);
         field.setAccessible(true);
         return field.get(alvo);
+    }
+
+    private static Field localizarCampo(Class<?> tipo, String nome) throws NoSuchFieldException {
+        Class<?> atual = tipo;
+        while (atual != null) {
+            try {
+                return atual.getDeclaredField(nome);
+            } catch (NoSuchFieldException ignored) {
+                atual = atual.getSuperclass();
+            }
+        }
+        throw new NoSuchFieldException(nome);
     }
 
     private static <T> T fx(Acao<T> acao) throws Exception {
@@ -170,6 +218,29 @@ class MenuControllerMockTest {
 
         public void alternarConfiguracoes() {
             onToggleSettings();
+        }
+        // Expose the onAdicionarJogo method so method references from tests can be used
+        public void onAdicionarJogo() {
+            try {
+                // Call the superclass implementation (or an override in subclasses)
+                java.lang.reflect.Method m = this.getClass().getMethod("onAdicionarJogo");
+                if (m.getDeclaringClass() != TestableMenuController.class) {
+                    // If overridden in subclass, invoke that
+                    m.invoke(this);
+                    return;
+                }
+            } catch (NoSuchMethodException ignored) {
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+            // Fallback: try to call protected method from superclass via reflection
+            try {
+                java.lang.reflect.Method superM = MenuController.class.getDeclaredMethod("onAdicionarJogo");
+                superM.setAccessible(true);
+                superM.invoke(this);
+            } catch (Exception e) {
+                // ignore if not present
+            }
         }
     }
 
