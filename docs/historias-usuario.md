@@ -153,3 +153,30 @@ Dado que o jogador esta na tela de detalhes
 E nenhum jogo foi configurado no controlador  
 Quando ele clicar no botao `Jogar`  
 Entao o sistema nao deve navegar para nenhuma tela de jogo.
+
+## US-06 - Adicionar um novo jogo
+
+**Como** desenvolvedor,  
+**eu quero** clicar no botao "Adicionar jogo" na tela inicial,  
+**para que** eu adicione um jogo que criei.
+
+**Prioridade:** Alta  
+**Status:** Entregue  
+**Issue/Card:** SCRUM-0  
+**PR:** #21
+**Commit:** `fc9b7de3e2492aa171913c5c78566dda4c0697ed`
+**Teste:** `deveAdicionarJogoNaLista`
+
+### Criterios de aceitacao
+
+**Cenario 1 - Abrir caixa de texto ao clicar em 'Novo Jogo'**  
+Dado que o desenvolvedor esteja na tela inicial  
+Quando ele clicar no botao `Novo Jogo`  
+Entao o sistema deve abrir uma caixa de texto para digitar o nome do jogo  
+E nenhuma outra tela de jogo deve acionável.
+
+**Cenario 2 - Adicionar novo jogo ao digitar o nome do jogo**  
+Dado que o desenvolvedor esteja na tela de adicionar jogo novo  
+E digitar o nome do jogo
+Quando ele clicar no botao `OK`  
+O sistema deve adicionar o novo jogo à lista de jogos 
