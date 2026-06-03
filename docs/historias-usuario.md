@@ -154,33 +154,6 @@ E nenhum jogo foi configurado no controlador
 Quando ele clicar no botao `Jogar`  
 Entao o sistema nao deve navegar para nenhuma tela de jogo.
 
-## US-05 - Adicionar um novo jogo
-
-**Como** desenvolvedor,  
-**eu quero** clicar no botao "Adicionar jogo" na tela inicial,  
-**para que** eu adicione um jogo que criei.
-
-**Prioridade:** Alta  
-**Status:** Entregue  
-**Issue/Card:** SCRUM-0  
-**PR:**  
-**Commit:** 
-**Teste:** `GameDetailControllerMockTest`
-
-### Criterios de aceitacao
-
-**Cenario 1 - Navegar para o Campo Minado ao clicar em Jogar**  
-Dado que o jogador esta na tela de detalhes do jogo `Campo Minado`  
-Quando ele clicar no botao `Jogar`  
-Entao o sistema deve navegar para a tela do Campo Minado  
-E nenhuma outra tela de jogo deve ser aberta.
-
-**Cenario 2 - Nao navegar quando nenhum jogo estiver configurado**  
-Dado que o jogador esta na tela de detalhes  
-E nenhum jogo foi configurado no controlador  
-Quando ele clicar no botao `Jogar`  
-Entao o sistema nao deve navegar para nenhuma tela de jogo.
-
 ## US-06 - Adicionar um novo jogo
 
 **Como** desenvolvedor,  
@@ -206,4 +179,4 @@ E nenhuma outra tela de jogo deve acionável.
 Dado que o desenvolvedor esteja na tela de adicionar jogo novo  
 E digitar o nome do jogo
 Quando ele clicar no botao `OK`  
-O sistema deve adicionar o novo jogo à lista de jogos 
+Entao sistema deve adicionar o novo jogo à lista de jogos 

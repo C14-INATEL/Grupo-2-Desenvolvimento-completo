@@ -54,21 +54,156 @@ HISTORIAS_PATH="docs/historias-usuario.md"
 if [ -f "$HISTORIAS_PATH" ]; then
     echo -e "${GREEN}[OK] Arquivo '$HISTORIAS_PATH' encontrado.${NC}"
     
-    # Validar formato clássico: Como <perfil>, eu quero <ação> para que <benefício>
-    if grep -qi "Como " "$HISTORIAS_PATH" && grep -qi "eu quero " "$HISTORIAS_PATH" && grep -qi "para que " "$HISTORIAS_PATH"; then
-        echo -e "${GREEN}[OK] Padrão 'Como/Eu quero/Para que' de Histórias de Usuário detectado.${NC}"
-    else
-        echo -e "${RED}[ERRO] O formato das histórias em '$HISTORIAS_PATH' parece estar fora do padrão exigido pelo edital.${NC}"
-        ERRORS=$((ERRORS + 1))
-    fi
+    # Validar formato e critérios por história (iterando por seção)
 
-    # Validar critérios de aceitação (Given/When/Then ou Dado/Quando/Então)
-    if grep -qi "Given" "$HISTORIAS_PATH" || grep -qi "Dado" "$HISTORIAS_PATH"; then
-        echo -e "${GREEN}[OK] Critérios de aceitação detectados nas histórias.${NC}"
-    else
-        echo -e "${RED}[ERRO] Não encontramos critérios de aceitação (Given/When/Then) em '$HISTORIAS_PATH'.${NC}"
-        ERRORS=$((ERRORS + 1))
+    # Validar rastreabilidade das histórias: Issue/PR reais e testes existentes
+    trace_errors=0
+    in_story=false
+    story_title=""
+    issue_or_pr_ok=false
+    tests_ok=false
+    has_como=false
+    has_quero=false
+    has_para=false
+    has_dado=false
+    has_quando=false
+    has_entao=false
+
+    finalize_story() {
+        if [ "$in_story" = true ]; then
+            syntax_ok=true
+            if [ "$has_como" != true ] || [ "$has_quero" != true ] || [ "$has_para" != true ]; then
+                syntax_ok=false
+            fi
+            if [ "$has_dado" != true ] || [ "$has_quando" != true ] || [ "$has_entao" != true ]; then
+                syntax_ok=false
+            fi
+
+            if [ "$syntax_ok" = true ]; then
+                echo -e "${GREEN}[OK] Sintaxe validada em '$story_title'.${NC}"
+            else
+                echo -e "${RED}[ERRO] Sintaxe incompleta em '$story_title' (Como/Eu quero/Para que e Dado/Quando/Então).${NC}"
+                trace_errors=$((trace_errors + 1))
+            fi
+
+            if [ "$issue_or_pr_ok" = true ] && [ "$tests_ok" = true ]; then
+                echo -e "${GREEN}[OK] Rastreabilidade validada em '$story_title'.${NC}"
+            else
+                echo -e "${RED}[ERRO] Rastreabilidade incompleta em '$story_title' (exige Issue/PR válido e testes existentes).${NC}"
+                trace_errors=$((trace_errors + 1))
+            fi
+        fi
+    }
+
+    has_real_issue_or_pr() {
+        # Aceita PR com #numero ou Issue/Card com conteúdo não vazio
+        local value="$1"
+        if echo "$value" | grep -Eq '#[0-9]+'; then
+            return 0
+        fi
+        if echo "$value" | grep -Eq '[A-Za-z0-9]'; then
+            return 0
+        fi
+        return 1
+    }
+
+    tests_exist() {
+        # Recebe linha completa de testes e valida se cada identificador aparece em src/test/java
+        local value="$1"
+        local has_any=false
+        local fail=false
+        local test_name
+
+        # Extrai itens entre crases; se não houver, faz split por vírgula
+        if echo "$value" | grep -q '\`'; then
+            while IFS= read -r test_name; do
+                [ -z "$test_name" ] && continue
+                has_any=true
+                if ! grep -R -q "$test_name" src/test/java; then
+                    fail=true
+                fi
+            done < <(printf '%s\n' "$value" | sed -n 's/.*`\([^`]*\)`.*/\1/p')
+        else
+            IFS=',' read -r -a tests_array <<< "$value"
+            for test_name in "${tests_array[@]}"; do
+                test_name=$(echo "$test_name" | xargs)
+                [ -z "$test_name" ] && continue
+                has_any=true
+                if ! grep -R -q "$test_name" src/test/java; then
+                    fail=true
+                fi
+            done
+        fi
+
+        if [ "$has_any" = true ] && [ "$fail" = false ]; then
+            return 0
+        fi
+        return 1
+    }
+
+    while IFS= read -r line; do
+        case "$line" in
+            "## US-"*)
+                finalize_story
+                story_title="$line"
+                in_story=true
+                issue_or_pr_ok=false
+                tests_ok=false
+                has_como=false
+                has_quero=false
+                has_para=false
+                has_dado=false
+                has_quando=false
+                has_entao=false
+                ;;
+            "**Como**"*|"**como**"*)
+                has_como=true
+                ;;
+            "**eu quero**"*|"**Eu quero**"*)
+                has_quero=true
+                ;;
+            "**para que**"*|"**Para que**"*)
+                has_para=true
+                ;;
+            "Dado "*|"Given "*)
+                has_dado=true
+                ;;
+            "Quando "*|"When "*)
+                has_quando=true
+                ;;
+            "Então "*|"Entao "*|"Then "*)
+                has_entao=true
+                ;;
+            "**Issue/Card:**"*)
+                issue_value="${line#**Issue/Card:**}"
+                issue_value=$(echo "$issue_value" | xargs)
+                if has_real_issue_or_pr "$issue_value"; then
+                    issue_or_pr_ok=true
+                fi
+                ;;
+            "**PR:**"*)
+                pr_value="${line#**PR:**}"
+                pr_value=$(echo "$pr_value" | xargs)
+                if has_real_issue_or_pr "$pr_value"; then
+                    issue_or_pr_ok=true
+                fi
+                ;;
+            "**Teste:**"*)
+                tests_value="${line#**Teste:**}"
+                tests_value=$(echo "$tests_value" | xargs)
+                if tests_exist "$tests_value"; then
+                    tests_ok=true
+                fi
+                ;;
+        esac
+    done < "$HISTORIAS_PATH"
+
+    finalize_story
+
+    if [ "$trace_errors" -gt 0 ]; then
+        ERRORS=$((ERRORS + trace_errors))
     fi
+    
 else
     echo -e "${RED}[ERRO] Arquivo '$HISTORIAS_PATH' NÃO foi encontrado!${NC}"
     ERRORS=$((ERRORS + 1))
