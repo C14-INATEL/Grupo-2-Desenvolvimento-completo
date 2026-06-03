@@ -33,6 +33,26 @@ Para rodar todos os testes que usam mock das lógicas e regras de negócio do si
 .\mvnw.cmd "-Dtest=mocks.**" test
 ```
 
+## Validar documentacao
+
+Para validar a documentacao (historias e rastreabilidade), execute:
+
+```bash
+bash scripts/validate_docs.sh
+```
+
+Se aparecer erro com $'\r', converta o arquivo para LF:
+
+```bash
+dos2unix scripts/validate_docs.sh
+```
+
+No PowerShell:
+
+```powershell
+$path = Resolve-Path 'scripts/validate_docs.sh'; $content = [System.IO.File]::ReadAllText($path); $content = $content -replace "`r`n", "`n"; [System.IO.File]::WriteAllText($path, $content)
+```
+
 ## Como rodar o Jenkins localmente
 
 O projeto possui um `Jenkinsfile` na raiz com uma pipeline simples de build. Nesta primeira versao, o Jenkins executa:
