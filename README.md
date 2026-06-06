@@ -17,6 +17,36 @@ No Terminal, execute:
 .\mvnw.cmd javafx:run
 ```
 
+## Funcionalidades
+
+- Menu principal com listagem dos jogos disponiveis.
+- Tela de detalhes para cada jogo, com nome, icone e descricao antes de iniciar a partida.
+- Navegacao entre menu, tela de detalhes e telas dos jogos.
+- Alteracao de nickname do jogador.
+- Painel de configuracoes do perfil.
+- Adicao e remocao de jogos na lista do menu.
+- Jogo Pedra, Papel e Tesoura com escolha do jogador, jogada do computador, resultado da rodada e placar.
+- Campo Minado com tabuleiro interativo, deteccao de minas, fim de jogo e reinicio de partida.
+- Jogo da Velha com tabuleiro, controle de rodada e navegacao de volta ao menu.
+- Logica de Batalha Naval implementada e coberta por testes, ainda sem tela propria integrada ao menu.
+
+## Como usar a aplicacao
+
+Ao abrir o projeto com `.\mvnw.cmd javafx:run`, a primeira tela exibida e o menu principal do Game Hub.
+
+1. Selecione um jogo na lista do menu.
+2. Clique em `Jogar` para abrir a tela de detalhes do jogo selecionado.
+3. Na tela de detalhes, confira a descricao e clique em `Jogar` novamente para iniciar.
+4. Use o botao de voltar nas telas dos jogos para retornar ao menu principal.
+5. Para personalizar o perfil, abra o painel de configuracoes e altere o nickname.
+6. Para testar a lista de jogos, use os botoes de adicionar ou remover jogo no menu.
+
+Jogos disponiveis pela interface:
+
+- Pedra, Papel e Tesoura
+- Campo Minado
+- Jogo da Velha
+
 ## Como rodar os testes unitários
 
 Para garantir o bom funcionamento das lógicas e das regras de negócio do sistema (como jogos, vitória, campo minado etc.), execute o seguinte comando no terminal:
@@ -41,6 +71,12 @@ Para validar a documentacao (historias e rastreabilidade), execute:
 bash scripts/validate_docs.sh
 ```
 
+No PowerShell, usando Git Bash:
+
+```powershell
+& "$env:PROGRAMFILES\Git\bin\bash.exe" -lc "./scripts/validate_docs.sh"
+```
+
 Se aparecer erro com $'\r', converta o arquivo para LF:
 
 ```bash
@@ -55,7 +91,9 @@ $path = Resolve-Path 'scripts/validate_docs.sh'; $content = [System.IO.File]::Re
 
 ## Como rodar o Jenkins localmente
 
-O projeto possui um `Jenkinsfile` na raiz com uma pipeline simples de build. Nesta primeira versao, o Jenkins executa:
+O projeto possui um `Jenkinsfile` na raiz com uma pipeline simples. Nesta primeira versao, o Jenkins executa o build e valida a documentacao.
+
+Build:
 
 ```powershell
 .\mvnw.cmd -B clean compile
@@ -65,6 +103,12 @@ ou, quando estiver rodando em Linux:
 
 ```bash
 ./mvnw -B clean compile
+```
+
+Validacao de documentacao:
+
+```bash
+./scripts/validate_docs.sh
 ```
 
 ### Requisitos

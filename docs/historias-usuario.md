@@ -48,17 +48,20 @@ Entao o sistema deve direcionar o jogador para a tela correspondente ao jogo sel
 
 ### Criterios de aceitacao
 
-**Cenario 1 - Computador vence com Papel contra Pedra** Dado que o jogador escolheu `pedra`  
+**Cenario 1 - Computador vence com Papel contra Pedra**  
+Dado que o jogador escolheu `pedra`  
 E o computador escolheu `papel`  
 Quando o metodo `model.getResult("pedra", "papel")` for executado  
 Entao o sistema deve retornar que o vencedor e o `Computador`.
 
-**Cenario 2 - Computador vence com Tesoura contra Papel** Dado que o jogador escolheu `papel`  
+**Cenario 2 - Computador vence com Tesoura contra Papel**  
+Dado que o jogador escolheu `papel`  
 E o computador escolheu `tesoura`  
 Quando o metodo `model.getResult("papel", "tesoura")` for executado  
 Entao o sistema deve retornar que o vencedor e o `Computador`.
 
-**Cenario 3 - Computador vence com Pedra contra Tesoura** Dado que o jogador escolheu `tesoura`  
+**Cenario 3 - Computador vence com Pedra contra Tesoura**  
+Dado que o jogador escolheu `tesoura`  
 E o computador escolheu `pedra`  
 Quando o metodo `model.getResult("tesoura", "pedra")` for executado  
 Entao o sistema deve retornar que o vencedor e o `Computador`.

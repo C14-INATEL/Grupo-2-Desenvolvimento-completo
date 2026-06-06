@@ -119,4 +119,3 @@ As principais reorganizacoes foram:
 - Commits semanticos ajudam a entender a evolucao do projeto.
 - Testes de model sao mais simples de rodar em CI do que testes JavaFX.
 - Decisoes de infraestrutura, como Jenkins, precisam considerar o ambiente onde a pipeline vai executar.
-- A estrutura da Batalha Naval deve ser revisada para seguir o mesmo padrao dos outros jogos.
