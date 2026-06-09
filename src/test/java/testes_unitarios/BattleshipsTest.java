@@ -1,3 +1,5 @@
+package testes_unitarios;
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import br.inatel.grupo2.features.Battleships;

@@ -15,6 +15,27 @@ pipeline {
             }
         }
 
+        stage('Testes Automatizados') {
+            steps {
+                script {
+                    echo 'Executando testes automatizados do projeto...'
+
+                    if (isUnix()) {
+                        sh 'chmod +x mvnw'
+                        sh './mvnw -B test'
+                    } else {
+                        bat '.\\mvnw.cmd -B test'
+                    }
+                }
+            }
+
+            post {
+                always {
+                    junit allowEmptyResults: true, testResults: 'target/surefire-reports/*.xml'
+                }
+            }
+        }
+
         stage('Validacao do README') {
             steps {
                 script {
