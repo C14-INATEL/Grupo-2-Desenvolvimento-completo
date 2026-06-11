@@ -36,6 +36,18 @@ pipeline {
             }
         }
 
+        stage('OWASP Dependency Check') {
+            steps {
+                script {
+                    if (isUnix()) {
+                        sh './mvnw -B dependency-check:check'
+                    } else {
+                        bat '.\\mvnw.cmd -B dependency-check:check'
+                    }
+                }
+            }
+        }
+
         stage('Validacao do README') {
             steps {
                 script {

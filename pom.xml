@@ -76,6 +76,18 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
             </plugin>
+
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>12.1.3</version>
+
+                <configuration>
+                    <knownExploitedEnabled>false</knownExploitedEnabled>
+                    <ossindexAnalyzerEnabled>false</ossindexAnalyzerEnabled>
+                    <failBuildOnCVSS>11</failBuildOnCVSS>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
