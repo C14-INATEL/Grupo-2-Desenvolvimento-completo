@@ -59,7 +59,7 @@ Este documento registra os refactorings aplicados ao longo do projeto, explicand
 * **Autor:** Pedro Henrique
 * **Commit:** `3859073`
 * **Data:** `12/06/2026`
-* **Mensagem do commit:** `refactor: reorganiza testes unitarios e atualiza documentacao`
+* **Mensagem do commit:** `docs: ajustando README e reorganizando testes do RockPaperScissors e Minesweeper`
 * **Card Scrum:** Documentar refactorings com rastreabilidade
 * **Arquivos relacionados:**
 
