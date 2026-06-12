@@ -217,17 +217,97 @@ docker start grupo2-jenkins
 Observacao: os testes JavaFX de controller/tela podem exigir bibliotecas graficas adicionais quando o Jenkins roda em container Linux. Por isso, no Jenkins Linux a pipeline executa os testes de dominio e logica que rodam sem interface grafica. Em ambiente Windows local, `.\mvnw.cmd -B clean test` executa a suite completa.
 
 ## 🤖 Uso de Inteligência Artificial
-
-[cite_start]Em conformidade com as diretrizes do projeto, declaramos o uso consciente e transparente de ferramentas de IA durante o desenvolvimento[cite: 89].
-
+Em conformidade com as diretrizes do projeto, declaramos o uso consciente e transparente de ferramentas de IA durante o desenvolvimento.
 ### Modelos Utilizados
-* [cite_start]**Gemini / ChatGPT / Claude:** Utilizados para auxiliar na arquitetura do projeto, modelagem do banco de dados e criação de scripts de automação[cite: 93, 94].
+
+**Gemini / ChatGPT / Claude:** Utilizados para auxiliar na arquitetura do projeto, implementação de funcionalidades, refatoração de código, elaboração de testes unitários, documentação e criação de scripts de automação.
 
 ### Dinâmica de Uso
-* [cite_start]A IA foi utilizada de forma colaborativa para pair programming, geração de templates de testes unitários e desenvolvimento de scripts auxiliares para a pipeline de CI/CD.
-* [cite_start]**O que não foi feito por IA:** Toda a lógica de negócio central, regras de escopo específicas e a integração final dos módulos foram desenvolvidas manualmente pelo grupo[cite: 97].
 
-### Exemplos de Prompts Reais
-1. *"Como estruturar uma pipeline declarativa no Jenkins que filtre comandos por sistema operacional?"* -> **Resultado:** Aceito e adaptado no `Jenkinsfile`.
-2. *"Crie um script em Bash para validar a existência de arquivos específicos de documentação em um repositório."* -> **Resultado:** Aceito e refinado no script `validate_docs.sh`.
-3. [cite_start]*"Analise o documento enviado, logo após isso, liste cada tópico fazendo um check-list para ser seguido no decorrer do processo."* [cite: 95]
+A IA foi utilizada de forma colaborativa durante o desenvolvimento do projeto, auxiliando na definição da arquitetura, geração de sugestões de implementação, criação de testes unitários, documentação e desenvolvimento de scripts auxiliares para a pipeline de CI/CD.
+
+**O que não foi feito por IA:** Toda a lógica de negócio central, as decisões arquiteturais finais, a integração entre módulos e a validação das funcionalidades foram realizadas manualmente pela equipe.
+
+#### Prompt 1
+- **Objetivo:** Criação da estrutura básica do projeto.
+- **Prompt utilizado:**
+  ```text
+  Gemini, preciso iniciar um projeto Java utilizando JavaFX para uma plataforma de jogos. Gostaria que você sugerisse uma estrutura de pastas organizada, seguindo boas práticas de desenvolvimento, separando telas, controladores, modelos e recursos da aplicação.
+  ```
+- **Conclusão:** A IA auxiliou na definição da estrutura inicial do projeto, sugerindo uma organização clara para os diretórios e arquivos. A proposta serviu como base para o desenvolvimento, facilitando a manutenção e a expansão futura da aplicação.
+
+#### Prompt 2
+- **Objetivo:** Criação e reestruturação do menu principal.
+- **Prompt utilizado:**
+  ```text
+  Gemini, temos um menu principal funcional, mas gostaríamos de melhorar sua organização visual e estrutural. Poderia sugerir uma nova implementação utilizando componentes JavaFX e aplicar melhorias na navegação entre telas?
+  ```
+- **Conclusão:** A IA forneceu sugestões para reorganização dos elementos visuais do menu e melhorias na navegação da aplicação. As recomendações foram adaptadas pela equipe para atender aos requisitos específicos do projeto.
+
+#### Prompt 3
+- **Objetivo:** Implementação das lógicas dos jogos.
+- **Prompt utilizado:**
+  ```text
+  ChatGPT, preciso implementar a lógica de um jogo em Java. Considere regras de vitória, derrota, empate e validação das jogadas. Poderia sugerir uma estrutura orientada a objetos que facilite testes e manutenção?
+  ```
+- **Conclusão:** A IA auxiliou na modelagem das regras de negócio dos jogos, sugerindo classes, métodos e fluxos de execução. As respostas serviram como referência para a implementação final realizada pela equipe.
+
+#### Prompt 4
+- **Objetivo:** Refatoração da lógica base do sistema.
+- **Prompt utilizado:**
+  ```text
+  Claude, analise este trecho de código e sugira melhorias de refatoração seguindo os princípios SOLID e boas práticas de programação orientada a objetos. O objetivo é reduzir duplicação de código e melhorar a legibilidade.
+  ```
+- **Conclusão:** A IA identificou pontos de melhoria na arquitetura e sugeriu alterações que contribuíram para tornar o código mais organizado, reutilizável e de fácil manutenção. As mudanças propostas foram avaliadas e aplicadas conforme a necessidade do projeto.
+
+#### Prompt 5
+- **Objetivo:** Auxílio na criação e compreensão das histórias de usuário.
+- **Prompt utilizado:**
+  ```text
+  ChatGPT, analise os requisitos deste projeto e me ajude a criar histórias de usuário seguindo o padrão: "Como [tipo de usuário], quero [objetivo], para que [benefício]". Além disso, sugira critérios de aceitação para cada história.
+  ```
+- **Conclusão:** A IA auxiliou na elaboração das histórias de usuário e dos critérios de aceitação, ajudando a equipe a compreender melhor os requisitos do sistema e a manter a documentação alinhada com os objetivos do projeto.
+
+#### Prompt 6
+- **Objetivo:** Criação de testes unitários para as regras dos jogos.
+- **Prompt utilizado:**
+  ```text
+  ChatGPT, preciso criar testes unitários para as regras de negócio do meu jogo em Java utilizando JUnit 5. Poderia sugerir cenários de teste cobrindo casos de sucesso, falha e situações de borda?
+  ```
+- **Conclusão:** A IA auxiliou na identificação dos principais cenários de teste, servindo como apoio para aumentar a cobertura dos testes e validar corretamente as regras implementadas.
+
+#### Prompt 7
+- **Objetivo:** Implementação da navegação entre telas.
+- **Prompt utilizado:**
+  ```text
+  Gemini, estou desenvolvendo uma aplicação JavaFX com múltiplas telas. Qual seria a melhor forma de realizar a troca de cenas mantendo o código organizado e evitando duplicação?
+  ```
+- **Conclusão:** A IA apresentou diferentes abordagens para gerenciamento de telas, auxiliando na definição da arquitetura utilizada para a navegação da aplicação.
+
+#### Prompt 8
+- **Objetivo:** Criação da pipeline de integração contínua.
+- **Prompt utilizado:**
+  ```text
+  Claude, preciso criar uma pipeline de CI para um projeto Java Maven. A pipeline deve compilar o projeto, executar validações e apresentar logs claros em caso de falha. Pode me fornecer um exemplo?
+  ```
+- **Conclusão:** A IA forneceu uma estrutura inicial para a pipeline, que foi adaptada pela equipe e utilizada como base para a configuração do processo de integração contínua.
+
+#### Prompt 9
+- **Objetivo:** Documentação do projeto.
+- **Prompt utilizado:**
+  ```text
+  ChatGPT, analise a estrutura do meu projeto e sugira uma documentação README contendo instruções de instalação, execução, funcionalidades e organização do sistema.
+  ```
+- **Conclusão:** A IA auxiliou na elaboração da documentação inicial do projeto, servindo como referência para a criação e padronização das informações disponibilizadas aos usuários e desenvolvedores.
+
+#### Prompt 10
+- **Objetivo:** Resolução de erros e depuração de código.
+- **Prompt utilizado:**
+  ```text
+  Gemini, estou recebendo uma exceção durante a execução desta funcionalidade. Analise o código e a mensagem de erro, identifique possíveis causas e sugira formas de corrigir o problema.
+  ```
+- **Conclusão:** A IA ajudou no processo de depuração ao apontar possíveis origens do erro e sugerir estratégias de correção, reduzindo o tempo necessário para identificar a falha e implementar a solução.
+
+### Considerações Finais
+
+As ferramentas de Inteligência Artificial foram utilizadas como apoio ao desenvolvimento, funcionando como assistentes para pesquisa, documentação e sugestões técnicas. Todas as respostas geradas foram analisadas, adaptadas e validadas pela equipe antes de serem incorporadas ao projeto.
