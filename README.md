@@ -91,23 +91,30 @@ $path = Resolve-Path 'scripts/validate_docs.sh'; $content = [System.IO.File]::Re
 
 ## Como rodar o Jenkins localmente
 
-O projeto possui um `Jenkinsfile` na raiz com uma pipeline simples. Nesta primeira versao, o Jenkins executa o build e valida a documentacao.
+O projeto possui um `Jenkinsfile` na raiz com uma pipeline Jenkins local para build, testes, package, verificacao de dependencias, validacao documental e deploy local do artefato.
 
-Build:
+Etapas executadas pela pipeline:
+
+- `Build`: compila o projeto com Maven Wrapper.
+- `Testes Automatizados`: executa testes unitarios e publica relatorio JUnit.
+- `Package`: gera o JAR da aplicacao e valida o `Main-Class` no manifesto.
+- `OWASP Dependency Check`: executa analise de dependencias quando possivel. Sem NVD API Key, essa etapa pode demorar bastante; por isso ela e tratada como analise nao bloqueante no Jenkins local.
+- `Validacao do README`: confere evidencias minimas de Jenkins, Uso de IA e prompts.
+- `Validacao das Historias e Rastreabilidade`: executa `scripts/validate_docs.sh`.
+- `Deploy Local`: publica o pacote em `target/deploy/game-hub` e arquiva o deploy no Jenkins.
+
+Comandos equivalentes para validar localmente no Windows:
 
 ```powershell
-.\mvnw.cmd -B clean compile
+.\mvnw.cmd -B clean test
+.\mvnw.cmd -B package -DskipTests
 ```
 
-ou, quando estiver rodando em Linux:
+Comandos equivalentes para validar localmente no Linux:
 
 ```bash
-./mvnw -B clean compile
-```
-
-Validacao de documentacao:
-
-```bash
+./mvnw -B clean test
+./mvnw -B package -DskipTests
 ./scripts/validate_docs.sh
 ```
 
@@ -172,7 +179,7 @@ Jenkinsfile
 
 9. Salve e clique em `Build Now`.
 
-### Acessar build e artefatos
+### Acessar build, artefatos e deploy local
 
 Com o Jenkins rodando localmente, acesse:
 
@@ -183,6 +190,15 @@ http://localhost:8080/job/grupo2-build/
 Para ver o log da build, abra a build desejada e clique em `Console Output`.
 
 Para ver os artefatos compilados, abra a build desejada e clique em `Artifacts`.
+
+Artefatos esperados:
+
+- `target/grupo2projeto-1.0-SNAPSHOT.jar`
+- `target/deploy/game-hub/grupo2projeto-1.0-SNAPSHOT.jar`
+- `target/deploy/game-hub/README_DEPLOY.txt`
+- `target/deploy/game-hub/SHA256SUMS.txt`
+
+O diretorio `target/deploy/game-hub` representa o deploy local da aplicacao desktop gerado pela pipeline.
 
 ### Parar e iniciar novamente
 
@@ -198,7 +214,7 @@ Para iniciar novamente:
 docker start grupo2-jenkins
 ```
 
-Observacao: os testes JavaFX podem exigir configuracao grafica adicional quando o Jenkins roda em container Linux. Por isso, a pipeline inicial valida apenas a compilacao do projeto.
+Observacao: os testes JavaFX de controller/tela podem exigir bibliotecas graficas adicionais quando o Jenkins roda em container Linux. Por isso, no Jenkins Linux a pipeline executa os testes de dominio e logica que rodam sem interface grafica. Em ambiente Windows local, `.\mvnw.cmd -B clean test` executa a suite completa.
 
 ## 🤖 Uso de Inteligência Artificial
 
