@@ -36,6 +36,25 @@ pipeline {
             }
         }
 
+        stage('Package') {
+            steps {
+                script {
+                    echo 'Gerando artefato da aplicacao...'
+                    if (isUnix()) {
+                        sh 'chmod +x mvnw'
+                        sh './mvnw -B package -DskipTests'
+                    } else {
+                        bat '.\\mvnw.cmd -B package -DskipTests'
+                    }
+                }
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: 'target/*.jar', fingerprint: true
+                }
+            }
+        }
+
         stage('OWASP Dependency Check') {
             steps {
                 script {
@@ -93,7 +112,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/classes/**'
+            archiveArtifacts allowEmptyArchive: true, artifacts: 'target/*.jar'
         }
     }
 }
