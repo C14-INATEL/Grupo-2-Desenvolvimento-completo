@@ -57,8 +57,8 @@ Este documento registra os refactorings aplicados ao longo do projeto, explicand
 **Rastreabilidade:**
 
 * **Autor:** Pedro Henrique
-* **Commit:** `<hash do commit>`
-* **Data:** `<data do commit>`
+* **Commit:** `3859073`
+* **Data:** `12/06/2026`
 * **Mensagem do commit:** `refactor: reorganiza testes unitarios e atualiza documentacao`
 * **Card Scrum:** Documentar refactorings com rastreabilidade
 * **Arquivos relacionados:**
