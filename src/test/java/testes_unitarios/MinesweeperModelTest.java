@@ -7,7 +7,22 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MinesweeperModelTest {
 
-    //  Nenhuma célula deve ter número negativo
+    @Test
+    public void testarQuantidadeDeBombasNoTabuleiro() {
+        MinesweeperBoard board = new MinesweeperBoard();
+        int qtdBombas = 0;
+
+        for (int i = 0; i < board.getRows(); i++) {
+            for (int j = 0; j < board.getCols(); j++) {
+                if (board.getCell(i, j).isMine()) {
+                    qtdBombas++;
+                }
+            }
+        }
+
+        assertEquals(10, qtdBombas, "O jogo tem que comecar sempre com 10 minas espalhadas");
+    }
+
     @Test
     public void testarSeNumerosNaoSaoNegativos() {
         MinesweeperBoard board = new MinesweeperBoard();
@@ -22,7 +37,6 @@ public class MinesweeperModelTest {
         }
     }
 
-    // Máximo de 8 minas ao redor (regra do campo minado)
     @Test
     public void testarLimiteMaximoDeBombasAdjacentes() {
         MinesweeperBoard board = new MinesweeperBoard();
@@ -37,7 +51,6 @@ public class MinesweeperModelTest {
         }
     }
 
-    // Se for bomba, não deve ter número adjacente relevante
     @Test
     public void testarSeBombasNaoPossuemNumero() {
         MinesweeperBoard board = new MinesweeperBoard();
@@ -54,15 +67,14 @@ public class MinesweeperModelTest {
         }
     }
 
-    // Revelar célula deve mudar estado corretamente
     @Test
-    public void testarRevelarCelula() {
-        MinesweeperCell cell = new MinesweeperCell();
+    public void testarEstadoInicialEDeclinioDaCelula() {
+        MinesweeperCell celula = new MinesweeperCell();
 
-        assertFalse(cell.isRevealed(), "A célula deve iniciar não revelada");
+        assertFalse(celula.isMine(), "As celulas tem que nascer sem nenhuma mina");
+        assertFalse(celula.isRevealed(), "A celula inicial nao pode estar clicada/revelada");
 
-        cell.setRevealed(true);
-
-        assertTrue(cell.isRevealed(), "A célula deve estar revelada após setRevealed(true)");
+        celula.setRevealed(true);
+        assertTrue(celula.isRevealed(), "Se eu clicar (setRevealed), o status tem que estar ativado");
     }
 }

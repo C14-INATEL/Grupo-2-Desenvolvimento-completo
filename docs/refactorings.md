@@ -33,3 +33,39 @@ Este documento registra os refactorings aplicados ao longo do projeto, explicand
 - **Arquivos relacionados:** `menu-view.fxml`, `game-detail-view.fxml`, `app.css`, controllers de navegacao e telas de jogos
 
 **Status:** Entregue
+
+## RF-02 - Reorganização da estrutura de testes unitários
+
+**Resumo:** reorganização dos testes unitários do projeto, centralizando arquivos que estavam distribuídos em diferentes pacotes em uma estrutura única voltada para testes automatizados.
+
+**Motivo:** durante a evolução do projeto, alguns testes estavam localizados em pacotes específicos de implementação, dificultando sua localização e manutenção. A reorganização buscou padronizar a estrutura de testes e facilitar sua identificação pelos desenvolvedores.
+
+**O que foi alterado:**
+
+* Remoção dos testes unitários dos pacotes específicos dos modelos.
+* Centralização dos testes em uma pasta dedicada a testes unitários.
+* Padronização da nomenclatura e organização dos arquivos de teste.
+* Melhoria da separação entre código de produção e código de teste.
+
+**Impacto no projeto:**
+
+* Maior facilidade para localizar e manter os testes.
+* Estrutura mais organizada e consistente.
+* Melhor compreensão da suíte de testes pelos membros da equipe.
+* Facilita futuras expansões da cobertura de testes.
+
+**Rastreabilidade:**
+
+* **Autor:** Pedro Henrique
+* **Commit:** `<hash do commit>`
+* **Data:** `<data do commit>`
+* **Mensagem do commit:** `refactor: reorganiza testes unitarios e atualiza documentacao`
+* **Card Scrum:** Documentar refactorings com rastreabilidade
+* **Arquivos relacionados:**
+
+  * `src/test/java/br/inatel/grupo2/model/minesweeper/MinesweeperTest.java`
+  * `src/test/java/br/inatel/grupo2/model/rockpaperscissors/RockPaperScissorsModelTest.java`
+  * `src/test/java/testes_unitarios/MinesweeperModelTest.java`
+  * `src/test/java/testes_unitarios/RockPaperScissorsModelTest.java`
+
+**Status:** Entregue

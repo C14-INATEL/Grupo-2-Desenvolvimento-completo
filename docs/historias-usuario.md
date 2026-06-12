@@ -159,27 +159,46 @@ Entao o sistema nao deve navegar para nenhuma tela de jogo.
 
 ## US-06 - Adicionar um novo jogo
 
-**Como** desenvolvedor,  
-**eu quero** clicar no botao "Adicionar jogo" na tela inicial,  
-**para que** eu adicione um jogo que criei.
+**Como** administrador da plataforma,  
+**eu quero** adicionar novos jogos ao menu principal,  
+**para que** a lista de jogos disponíveis possa ser expandida sem alterar a experiência dos jogadores.
 
 **Prioridade:** Alta  
 **Status:** Entregue  
 **Issue/Card:** SCRUM-0  
-**PR:** #21
-**Commit:** `fc9b7de3e2492aa171913c5c78566dda4c0697ed`
+**PR:** #21  
+**Commit:** `fc9b7de3e2492aa171913c5c78566dda4c0697ed`  
 **Teste:** `deveAdicionarJogoNaLista`
 
-### Criterios de aceitacao
+### Critérios de aceitação
 
-**Cenario 1 - Abrir caixa de texto ao clicar em 'Novo Jogo'**  
-Dado que o desenvolvedor esteja na tela inicial  
-Quando ele clicar no botao `Novo Jogo`  
-Entao o sistema deve abrir uma caixa de texto para digitar o nome do jogo  
-E nenhuma outra tela de jogo deve acionável.
+**Cenário 1 - Abrir caixa de diálogo para cadastro de jogo**  
+Dado que o administrador esteja na tela inicial  
+Quando ele clicar no botão `Novo Jogo`  
+Então o sistema deve exibir uma caixa de diálogo para inserção do nome do jogo.
 
-**Cenario 2 - Adicionar novo jogo ao digitar o nome do jogo**  
-Dado que o desenvolvedor esteja na tela de adicionar jogo novo  
-E digitar o nome do jogo
-Quando ele clicar no botao `OK`  
-Entao sistema deve adicionar o novo jogo à lista de jogos 
+**Cenário 2 - Adicionar um novo jogo à lista**  
+Dado que o administrador abriu a caixa de diálogo de cadastro  
+E informou um nome válido para o jogo  
+Quando clicar no botão `OK`  
+Então o sistema deve adicionar o novo jogo à lista de jogos disponíveis.
+
+**Cenário 3 - Atualizar a lista exibida no menu**  
+Dado que um novo jogo foi adicionado com sucesso  
+Quando o cadastro for concluído  
+Então a lista de jogos exibida no menu principal deve ser atualizada.
+
+
+# Matriz de Rastreabilidade
+
+Esta seção apresenta a relação entre as histórias de usuário, os artefatos de desenvolvimento e os testes automatizados, permitindo rastrear a implementação de cada requisito até sua validação.
+
+| História | Prioridade | Status | Issue/Card | PR | Commit | Teste Automatizado |
+|-----------|------------|---------|------------|-----|---------|-------------------|
+| US-01 - Acessar e usar o menu principal | Alta | Entregue | SCRUM-0 | #6 | `9c72798` | `MenuTest` |
+| US-02 - Vitória do Computador nas Rodadas | Alta | Entregue | Criar histórias de usuário com rastreabilidade | #10 | `c4ac25bd8124f98e5409406326dc8da2fe5382a2` | `computadorDeveVencerComPapelContraPedra`, `computadorDeveVencerComTesouraContraPapel`, `computadorDeveVencerComPedraContraTesoura` |
+| US-03 - Jogar Campo Minado e reiniciar a partida | Alta | Entregue | SCRUM-0 | #16 | `4f780255556348a01f8624ee1eee91bb69918c66` | `deveMostrarFimDeJogoAoClicarEmMina`, `deveCriarNovoTabuleiroAoClicarEmNovoJogo`, `deveVoltarParaMenuAoClicarEmVoltar` |
+| US-04 - Exibir Resultado da Rodada | Alta | Entregue | SCRUM-0 | #14 | `bd10be658801ddafb632fb8718b819fbee466400` | `RockPaperScissorsViewControllerMockTest` |
+| US-05 - Navegar para o Jogo pela Tela de Detalhes | Alta | Entregue | SCRUM-0 | #17 | `d535d882b901eecb1c6505ed8acda44c205d15ed` | `GameDetailControllerMockTest` |
+| US-06 - Adicionar um novo jogo | Alta | Entregue | SCRUM-0 | #21 | `fc9b7de3e2492aa171913c5c78566dda4c0697ed` | `deveAdicionarJogoNaLista` |
+
