@@ -28,7 +28,7 @@ No Terminal, execute:
 - Jogo Pedra, Papel e Tesoura com escolha do jogador, jogada do computador, resultado da rodada e placar.
 - Campo Minado com tabuleiro interativo, deteccao de minas, fim de jogo e reinicio de partida.
 - Jogo da Velha com tabuleiro, controle de rodada e navegacao de volta ao menu.
-- Logica de Batalha Naval implementada e coberta por testes, ainda sem tela propria integrada ao menu.
+- Batalha Naval com tabuleiro 10x10, frota aleatoria, ataques por coordenada, contadores de tentativas/acertos e reinicio de partida.
 
 ## Como usar a aplicacao
 
@@ -46,6 +46,7 @@ Jogos disponiveis pela interface:
 - Pedra, Papel e Tesoura
 - Campo Minado
 - Jogo da Velha
+- Batalha Naval
 
 ## Como rodar os testes unitários
 
@@ -232,17 +233,17 @@ A IA foi utilizada de forma colaborativa durante o desenvolvimento do projeto, a
 - **Objetivo:** Criação da estrutura básica do projeto.
 - **Prompt utilizado:**
   ```text
-  Gemini, preciso iniciar um projeto Java utilizando JavaFX para uma plataforma de jogos. Gostaria que você sugerisse uma estrutura de pastas organizada, seguindo boas práticas de desenvolvimento, separando telas, controladores, modelos e recursos da aplicação.
+  preciso iniciar um projeto Java utilizando JavaFX para uma plataforma de jogos. Gostaria que você sugerisse uma estrutura de pastas organizada, seguindo boas práticas de desenvolvimento, separando telas, controladores, modelos e recursos da aplicação.
   ```
-- **Conclusão:** A IA auxiliou na definição da estrutura inicial do projeto, sugerindo uma organização clara para os diretórios e arquivos. A proposta serviu como base para o desenvolvimento, facilitando a manutenção e a expansão futura da aplicação.
+- **Conclusão:** Utilizando o Gemini, foi feito a estrutura inicial do projeto, sugerindo uma organização clara para os diretórios e arquivos, servindo como base para o desenvolvimento, facilitando a manutenção e a expansão futura da aplicação.
 
 #### Prompt 2
 - **Objetivo:** Criação e reestruturação do menu principal.
 - **Prompt utilizado:**
   ```text
-  Gemini, temos um menu principal funcional, mas gostaríamos de melhorar sua organização visual e estrutural. Poderia sugerir uma nova implementação utilizando componentes JavaFX e aplicar melhorias na navegação entre telas?
+  temos um menu principal funcional, mas gostaríamos de melhorar sua organização visual e estrutural. Poderia sugerir uma nova implementação utilizando componentes JavaFX e aplicar melhorias na navegação entre telas?
   ```
-- **Conclusão:** A IA forneceu sugestões para reorganização dos elementos visuais do menu e melhorias na navegação da aplicação. As recomendações foram adaptadas pela equipe para atender aos requisitos específicos do projeto.
+- **Conclusão:**Utilizando o Gemini, a IA forneceu sugestões para reorganização dos elementos visuais do menu e melhorias na navegação da aplicação, adaptadas pela equipe para atender aos requisitos específicos do projeto.
 
 #### Prompt 3
 - **Objetivo:** Implementação das lógicas dos jogos.
@@ -250,7 +251,7 @@ A IA foi utilizada de forma colaborativa durante o desenvolvimento do projeto, a
   ```text
   ChatGPT, preciso implementar a lógica de um jogo em Java. Considere regras de vitória, derrota, empate e validação das jogadas. Poderia sugerir uma estrutura orientada a objetos que facilite testes e manutenção?
   ```
-- **Conclusão:** A IA auxiliou na modelagem das regras de negócio dos jogos, sugerindo classes, métodos e fluxos de execução. As respostas serviram como referência para a implementação final realizada pela equipe.
+- **Conclusão:** Com o Codex(ChatGPT), Foi feito a modelagem das regras de negócio dos jogos, sugerindo classes, métodos e regras. As respostas serviram como referência para a implementação final realizada pela equipe.
 
 #### Prompt 4
 - **Objetivo:** Refatoração da lógica base do sistema.
@@ -258,55 +259,55 @@ A IA foi utilizada de forma colaborativa durante o desenvolvimento do projeto, a
   ```text
   Claude, analise este trecho de código e sugira melhorias de refatoração seguindo os princípios SOLID e boas práticas de programação orientada a objetos. O objetivo é reduzir duplicação de código e melhorar a legibilidade.
   ```
-- **Conclusão:** A IA identificou pontos de melhoria na arquitetura e sugeriu alterações que contribuíram para tornar o código mais organizado, reutilizável e de fácil manutenção. As mudanças propostas foram avaliadas e aplicadas conforme a necessidade do projeto.
+- **Conclusão:** Utilizando o Claude, a IA identificou pontos de melhoria na arquitetura e sugeriu alterações para tornar o código mais organizado, reutilizável e de fácil manutenção. As mudanças propostas foram avaliadas e aplicadas conforme a necessidade do projeto.
 
 #### Prompt 5
 - **Objetivo:** Auxílio na criação e compreensão das histórias de usuário.
 - **Prompt utilizado:**
   ```text
-  ChatGPT, analise os requisitos deste projeto e me ajude a criar histórias de usuário seguindo o padrão: "Como [tipo de usuário], quero [objetivo], para que [benefício]". Além disso, sugira critérios de aceitação para cada história.
+  Chat, a analise os requisitos deste projeto e me ajude a criar histórias de usuário seguindo o padrão: "Como [tipo de usuário], quero [objetivo], para que [benefício]". Além disso, sugira critérios de aceitação para cada história.
   ```
-- **Conclusão:** A IA auxiliou na elaboração das histórias de usuário e dos critérios de aceitação, ajudando a equipe a compreender melhor os requisitos do sistema e a manter a documentação alinhada com os objetivos do projeto.
+- **Conclusão:** Usando o ChatGPT, a IA auxiliou na elaboração das histórias de usuário e dos critérios de aceitação, inclusive montando a estrutura e ajudando na rastreabilidade dos commits.
 
 #### Prompt 6
 - **Objetivo:** Criação de testes unitários para as regras dos jogos.
 - **Prompt utilizado:**
   ```text
-  ChatGPT, preciso criar testes unitários para as regras de negócio do meu jogo em Java utilizando JUnit 5. Poderia sugerir cenários de teste cobrindo casos de sucesso, falha e situações de borda?
+  Chat, preciso criar testes unitários para as regras de negócio do meu jogo em Java utilizando JUnit 5. Poderia sugerir cenários de teste cobrindo casos de sucesso, falha e situações de borda?
   ```
-- **Conclusão:** A IA auxiliou na identificação dos principais cenários de teste, servindo como apoio para aumentar a cobertura dos testes e validar corretamente as regras implementadas.
+- **Conclusão:** O codex(ChatGPT) auxiliou na identificação dos principais cenários de teste, servindo como apoio para aumentar a cobertura e validação correta das regras implementadas.
 
 #### Prompt 7
 - **Objetivo:** Implementação da navegação entre telas.
 - **Prompt utilizado:**
   ```text
-  Gemini, estou desenvolvendo uma aplicação JavaFX com múltiplas telas. Qual seria a melhor forma de realizar a troca de cenas mantendo o código organizado e evitando duplicação?
+  estou desenvolvendo uma aplicação JavaFX com múltiplas telas. Qual seria a melhor forma de realizar a troca de cenas mantendo o código organizado e evitando duplicação?
   ```
-- **Conclusão:** A IA apresentou diferentes abordagens para gerenciamento de telas, auxiliando na definição da arquitetura utilizada para a navegação da aplicação.
+- **Conclusão:** Utilizando o Gemini, a IA apresentou diferentes abordagens para gerenciamento de telas, auxiliando na definição e que mais tarde, sofreu um refactor.
 
 #### Prompt 8
 - **Objetivo:** Criação da pipeline de integração contínua.
 - **Prompt utilizado:**
   ```text
-  Claude, preciso criar uma pipeline de CI para um projeto Java Maven. A pipeline deve compilar o projeto, executar validações e apresentar logs claros em caso de falha. Pode me fornecer um exemplo?
+  preciso criar uma pipeline de CI para um projeto Java Maven. A pipeline deve compilar o projeto, executar validações e apresentar logs claros em caso de falha. Pode me fornecer um exemplo?
   ```
-- **Conclusão:** A IA forneceu uma estrutura inicial para a pipeline, que foi adaptada pela equipe e utilizada como base para a configuração do processo de integração contínua.
+- **Conclusão:** Utilizando o Claude, a IA forneceu uma estrutura inicial para a pipeline, que foi adaptada pela equipe com um job por integrante, como base para a configuração do processo de integração contínua.
 
 #### Prompt 9
 - **Objetivo:** Documentação do projeto.
 - **Prompt utilizado:**
   ```text
-  ChatGPT, analise a estrutura do meu projeto e sugira uma documentação README contendo instruções de instalação, execução, funcionalidades e organização do sistema.
+  Chat, analise a estrutura do meu projeto e sugira uma documentação README contendo instruções de instalação, execução, funcionalidades e organização do sistema.
   ```
-- **Conclusão:** A IA auxiliou na elaboração da documentação inicial do projeto, servindo como referência para a criação e padronização das informações disponibilizadas aos usuários e desenvolvedores.
+- **Conclusão:** Usando o ChatGPT, a IA auxiliou na elaboração da documentação inicial do projeto, servindo como referência para a criação e padronização das informações disponibilizadas aos usuários e desenvolvedores.
 
 #### Prompt 10
 - **Objetivo:** Resolução de erros e depuração de código.
 - **Prompt utilizado:**
   ```text
-  Gemini, estou recebendo uma exceção durante a execução desta funcionalidade. Analise o código e a mensagem de erro, identifique possíveis causas e sugira formas de corrigir o problema.
+  estou recebendo uma exceção durante a execução desta funcionalidade. Analise o código e a mensagem de erro, identifique possíveis causas e sugira formas de corrigir o problema.
   ```
-- **Conclusão:** A IA ajudou no processo de depuração ao apontar possíveis origens do erro e sugerir estratégias de correção, reduzindo o tempo necessário para identificar a falha e implementar a solução.
+- **Conclusão:** Utilizando o Gemini, a IA ajudou no processo de depuração ao apontar possíveis origens do erro e sugerir estratégias de correção, reduzindo o tempo necessário para identificar a falha e implementar a solução.
 
 ### Considerações Finais
 

@@ -51,6 +51,30 @@ class GameDetailControllerMockTest {
     }
 
     @Test
+    void deveNavegarParaBatalhaNavalAoClicarEmJogar() throws Exception {
+
+        GameDetailController controller = new GameDetailController();
+        MockGameNavigator navigator = new MockGameNavigator();
+
+        fx(() -> {
+            montarTela(controller);
+            controller.setNavigator(navigator);
+
+            controller.setGame("Batalha Naval", "A", "Afunde todos os navios.");
+
+            chamarOnPlay(controller);
+
+            return null;
+        });
+
+        assertEquals(1, navigator.battleshipsChamado);
+        assertEquals(0, navigator.menuChamado);
+        assertEquals(0, navigator.minesweeperChamado);
+        assertEquals(0, navigator.rpsChamado);
+    }
+
+
+    @Test
     void naoDeveNavegarQuandoNenhumJogoEstiverConfigurado() throws Exception {
 
         GameDetailController controller = new GameDetailController();
@@ -78,6 +102,7 @@ class GameDetailControllerMockTest {
         int rpsChamado = 0;
         int minesweeperChamado = 0;
         int tictactoeChamado = 0;
+        int battleshipsChamado = 0;
 
         @Override
         public void showMenuScreen() {
@@ -102,6 +127,11 @@ class GameDetailControllerMockTest {
         @Override
         public void showTicTacToeScreen() {
             tictactoeChamado++;
+        }
+
+        @Override
+        public void showBattleshipsScreen() {
+            battleshipsChamado++;
         }
     }
 

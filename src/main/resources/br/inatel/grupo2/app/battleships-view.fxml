@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="700.0" prefWidth="900.0" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="br.inatel.grupo2.controller.battleships.BattleshipsController">
+    <padding>
+        <Insets bottom="28.0" left="28.0" right="28.0" top="28.0"/>
+    </padding>
+
+    <top>
+        <VBox spacing="12.0">
+            <HBox alignment="CENTER_LEFT" spacing="12.0">
+                <Button text="Voltar" onAction="#onBack" styleClass="ghost-button"/>
+                <Label text="Batalha Naval" styleClass="screen-title"/>
+            </HBox>
+            <Label text="Ataque o tabuleiro inimigo e afunde todos os navios." styleClass="screen-subtitle"/>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" spacing="22.0">
+            <HBox alignment="CENTER" spacing="18.0">
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card battleships-info-card">
+                    <Label text="STATUS" styleClass="card-label"/>
+                    <Label fx:id="statusLabel" text="Partida em andamento" styleClass="choice-value"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card battleships-info-card">
+                    <Label text="TENTATIVAS" styleClass="card-label"/>
+                    <Label fx:id="attemptsLabel" text="0" styleClass="score-number"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card battleships-info-card">
+                    <Label text="ACERTOS" styleClass="card-label"/>
+                    <Label fx:id="hitsLabel" text="0/17" styleClass="score-number"/>
+                </VBox>
+
+                <VBox alignment="CENTER" spacing="8.0" styleClass="score-card battleships-info-card">
+                    <Label text="RESTANTES" styleClass="card-label"/>
+                    <Label fx:id="remainingLabel" text="17" styleClass="score-number"/>
+                </VBox>
+            </HBox>
+
+            <VBox alignment="CENTER" spacing="16.0" styleClass="battleships-board-card">
+                <GridPane fx:id="grid" alignment="CENTER" hgap="6.0" vgap="6.0"/>
+            </VBox>
+
+            <Label fx:id="resultLabel" styleClass="result-label" text="Aguardando jogada..." wrapText="true"/>
+
+            <Button fx:id="retryButton" managed="false" mnemonicParsing="false" onAction="#onNewGame"
+                    styleClass="retry-icon-button" text="R" visible="false"/>
+        </VBox>
+    </center>
+
+    <bottom>
+        <HBox alignment="CENTER" spacing="12.0">
+            <Label text="Tabuleiro 10x10 com frota de 5 navios" styleClass="helper-text"/>
+            <Button text="Nova partida" onAction="#onNewGame" styleClass="secondary-button"/>
+        </HBox>
+    </bottom>
+</BorderPane>

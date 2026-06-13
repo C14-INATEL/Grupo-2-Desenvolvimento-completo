@@ -14,7 +14,7 @@ public class MenuLogicaTest {
 
     // 1. Teste de Quantidade
     @Test
-    void listaDeveTerTresJogosIniciais() throws Exception {
+    void listaDeveTerQuatroJogosIniciais() throws Exception {
         MenuController controller = new MenuController();
 
 
@@ -22,7 +22,7 @@ public class MenuLogicaTest {
         field.setAccessible(true);
         ObservableList<String> lista = (ObservableList<String>) field.get(controller);
 
-        assertEquals(3, lista.size(), "A lista deveria começar com exatamente 3 jogos.");
+        assertEquals(4, lista.size(), "A lista deveria comecar com exatamente 4 jogos.");
     }
 
     // 2. Teste de Filtro de Nomes
@@ -50,6 +50,7 @@ public class MenuLogicaTest {
         assertTrue(lista.contains("\uD83E\uDEA8  Pedra, Papel e Tesoura"));
         assertTrue(lista.contains("\uD83D\uDCA3  Campo Minado"));
         assertTrue(lista.contains("\u274C  Jogo da Velha"));
+        assertTrue(lista.contains("\u2693  Batalha Naval"));
     }
 
     // 4. Teste extra: Validação de nome válido

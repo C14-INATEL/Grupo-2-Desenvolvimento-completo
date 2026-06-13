@@ -36,6 +36,10 @@ public class GameHubApplication extends Application {
         showScreen("tictactoe-view.fxml", "Jogo da Velha");
     }
 
+    public static void showBattleshipsScreen() {
+        showScreen("battleships-view.fxml", "Batalha Naval");
+    }
+
     public static void showGameDetailScreen(String gameName, String icon, String description) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(GameHubApplication.class.getResource("game-detail-view.fxml"));

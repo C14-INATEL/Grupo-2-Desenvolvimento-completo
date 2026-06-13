@@ -10,4 +10,6 @@ public interface GameNavigator {
     void showMinesweeperScreen();
 
     void showTicTacToeScreen();
+
+    default void showBattleshipsScreen() {}
 }

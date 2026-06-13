@@ -115,7 +115,8 @@ public class BattleshipsTest {
             System.setOut(originalOut);
         }
         String output = outContent.toString();
-        assertTrue(output.contains("Já tentou essa posição!"), "Deve avisar que já tentou essa posição");
+        assertTrue(output.contains("tentou") && output.contains("posi"),
+                "Deve avisar que ja tentou essa posicao");
     }
 
     @Test

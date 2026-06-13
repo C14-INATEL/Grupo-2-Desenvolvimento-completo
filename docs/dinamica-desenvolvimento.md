@@ -86,7 +86,7 @@ O historico mostra alguns bloqueios e dificuldades reais:
 - Necessidade de reorganizar estrutura Maven e pastas do projeto apos as primeiras implementacoes.
 - Limpeza de arquivos temporarios e pastas redundantes durante o refinamento da interface.
 - Dificuldade de rodar testes JavaFX no Jenkins em container Linux por falta de bibliotecas graficas, como `libX11` e dependencias do JavaFX.
-- Batalha Naval ficou inicialmente como logica isolada em `features`, diferente da organizacao dos outros jogos em `model` e `controller`.
+- Batalha Naval ficou inicialmente como logica isolada em `features`, diferente da organizacao dos outros jogos em `model` e `controller`. Na etapa final, essa pendencia foi corrigida com a criacao de uma tela propria, controller JavaFX, integracao com o menu/detalhes e testes de navegacao.
 
 ## Reorganizacoes realizadas
 
@@ -95,6 +95,7 @@ As principais reorganizacoes foram:
 - Organizacao da estrutura Maven e compatibilidade entre dependencias.
 - Reorganizacao da aplicacao para usar controllers, views FXML e navegacao centralizada.
 - Criacao de tela de detalhes antes de abrir um jogo.
+- Integracao da Batalha Naval ao fluxo visual do Game Hub, aproveitando a logica existente e adicionando controller, FXML e rota no `GameNavigator`.
 - Separacao de testes unitarios e testes com mock.
 - Inclusao de documentacao de execucao e testes no README.
 - Criacao de documentacao de historias de usuario em `docs/historias-usuario.md`.
@@ -111,6 +112,7 @@ As principais reorganizacoes foram:
 - `19/04/2026` a `01/05/2026`: foco em testes mock de menu, Campo Minado e Pedra, Papel e Tesoura.
 - `14/05/2026` a `16/05/2026`: documentacao das historias de usuario.
 - `21/05/2026`: criacao da pipeline inicial com Jenkins.
+- `12/06/2026`: integracao da Batalha Naval como jogo completo na interface, com tabuleiro 10x10, tela propria e navegacao pelo menu.
 
 ## Licoes aprendidas
 

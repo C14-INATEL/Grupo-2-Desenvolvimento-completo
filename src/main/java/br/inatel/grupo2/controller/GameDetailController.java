@@ -28,6 +28,7 @@ public class GameDetailController {
             case "Pedra, Papel e Tesoura" -> navigator.showRockPaperScissorsScreen();
             case "Campo Minado" -> navigator.showMinesweeperScreen();
             case "Jogo da Velha" -> navigator.showTicTacToeScreen();
+            case "Batalha Naval" -> navigator.showBattleshipsScreen();
             default -> {} // outros jogos futuros
         }
     }

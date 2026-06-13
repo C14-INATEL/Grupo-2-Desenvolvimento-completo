@@ -27,4 +27,9 @@ public class JavaFxGameNavigator implements GameNavigator {
     public void showTicTacToeScreen() {
         GameHubApplication.showTicTacToeScreen();
     }
+
+    @Override
+    public void showBattleshipsScreen() {
+        GameHubApplication.showBattleshipsScreen();
+    }
 }
